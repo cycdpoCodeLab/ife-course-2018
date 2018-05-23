@@ -28,8 +28,59 @@ body {
  * Main Frame
  *---------------------------*/
 
+%common {
+  $H: 30px;
+  margin: 40px auto;
+  width: 100px;
+  height: $H;
 
+  font-weight: 700;
+  line-height: $H;
+  text-align: center;
+  color: $fontColor;
+}
 
+.text {
+  $duration: .3s;
 
+  @extend %common;
+  font-size: $fontL;
+  transition: color $duration;
+
+  &::after {
+    display: block;
+    content: " ";
+    width: 100%;
+    height: 4px;
+    background-color: $colorBlue;
+
+    transform-origin: 50% 50%;
+    transform: scaleX(0);
+
+    transition: transform $duration;
+  }
+
+  &.active {
+    color: $colorBlue;
+
+    &::after {
+      transform: scaleX(1);
+    }
+  }
+}
+
+.button {
+  display: block;
+  @extend %common;
+  font-size: $fontS;
+
+  background-color: $bgc;
+  border: 1px solid $fontColor;
+  border-radius: 5px;
+
+  &:active {
+    background-color: darken($bgc, 5%);
+  }
+}
 
 
