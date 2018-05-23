@@ -20,13 +20,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const ACTIVE_CLASS_NAME = 'active';
 
-  eButton.addEventListener('click', () => {
-    if (eText.classList.contains(ACTIVE_CLASS_NAME)) {
-      eText.classList.remove(ACTIVE_CLASS_NAME);
-      return;
-    }
-
-    eText.classList.add(ACTIVE_CLASS_NAME);
-  });
-
+  // 点击按钮时变更eText的样式
+  eButton.addEventListener('click', () => eText.classList.toggle(ACTIVE_CLASS_NAME));
 }, false);

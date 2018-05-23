@@ -41,12 +41,15 @@ body {
 }
 
 .text {
+  // 设定过渡持续时间和曲线
   $duration: .3s;
+  $bezier: cubic-bezier(.24, .23, .45, 1.43);
 
   @extend %common;
   font-size: $fontL;
-  transition: color $duration;
+  transition: color $duration $bezier;
 
+  // 用伪类实现底下的激活状态的线
   &::after {
     display: block;
     content: " ";
@@ -57,9 +60,10 @@ body {
     transform-origin: 50% 50%;
     transform: scaleX(0);
 
-    transition: transform $duration;
+    transition: transform $duration $bezier;
   }
 
+  // 激活状态的变化
   &.active {
     color: $colorBlue;
 
