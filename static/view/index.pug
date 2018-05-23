@@ -2,6 +2,12 @@ doctype html
 html(lang='en')
   head
     include includes/meta.pug
-    title IFE2018
+    title No.2 - 初步接触 CSS 2D 变形
 
   body
+    //- 循环输出6个盒子
+    - var n = 0;
+    while n < 6
+      div(class="box"+n) box#{n}
+      - n++;
+

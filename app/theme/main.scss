@@ -27,9 +27,59 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
+// 盒子通用样式
+%commonBox {
+  $borderWidth: 2px;
+  width: 60px - $borderWidth * 2;
+  height: 68px - $borderWidth * 2;
+  float: left;
+  margin: 20px 20px;
 
+  background-color: #f7f6f6;
+  border: $borderWidth solid #ebebeb;
 
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 68px - $borderWidth * 2;
+  color: black;
+  text-align: center;
 
+  transform-origin: 50% 50%;
+}
 
+// 原始
+.box0 {
+  @extend %commonBox;
+}
 
+// 向左倾斜30度
+.box1 {
+  @extend %commonBox;
+  transform: skewX(30deg);
+}
+
+// 压缩2倍
+.box2 {
+  @extend %commonBox;
+  transform: scaleX(.5);
+}
+
+// 旋转45度
+.box3 {
+  @extend %commonBox;
+  transform: rotate(45deg);
+}
+
+// x轴位移10px y轴位移20px
+.box4 {
+  @extend %commonBox;
+  transform: translate(10px, 20px);
+}
+
+// 同时包含上述属性
+.box5 {
+  @extend %commonBox;
+  // 排列组合了好久弄不出来，改了下参数强行看起来差不多orz
+  transform: scale(.65, 1.3) skewX(40deg) rotate(45deg) translate(20px, 30px);
+}
 
