@@ -28,6 +28,221 @@ body {
  * Main Frame
  *---------------------------*/
 
+/* face */
+.face {
+  @extend %abs;
+  z-index: 10;
+  left: 50%;
+  top: 40px;
+  margin-left: -175px;
+  width: 350px;
+  height: 250px;
+
+  border-radius: 50% 50% 30% 30%;
+  border: 2px solid #3f200b;
+
+  background: $colorWhite;
+  overflow: hidden;
+
+  // 修复加载时变形动画
+  &.transition {
+    transition: border-radius .5s;
+  }
+}
+
+/* ear */
+.ear-wrap {
+  @extend %abs;
+  left: 50%;
+  width: 300px;
+  margin-left: -150px;
+  margin-top: 20px;
+
+  %ear {
+    @extend %abs;
+    top: 0;
+    width: 80px;
+    height: 100px;
+    border: 2px solid black;
+  }
+
+  .left {
+    @extend %ear;
+    left: 0;
+    background-color: $colorWhite;
+    border-radius: 100% 10% 50% 0;
+  }
+
+  .right {
+    @extend %ear;
+    right: 0;
+    border-radius: 10% 100% 0 50%;
+    background-color: $colorYellow;
+  }
+}
+
+/* 头发 */
+.hair {
+  @extend %abs;
+  left: 50%;
+  width: 120px;
+  height: 120px;
+  margin-left: 50px;
+  margin-top: -40px;
+
+  background: $colorYellow;
+  border-radius: 50%;
+}
+
+/* 眼睛 */
+.eye-wrap {
+  @extend %abs;
+  top: 90px;
+  left: 50%;
+  width: 280px;
+  height: 70px;
+  margin-left: -140px;
+  overflow: hidden;
+
+  %eye {
+    @extend %abs;
+    top: 0;
+    height: 100px;
+    width: 100px;
+  }
+
+  .left {
+    @extend %eye;
+    left: 0;
+  }
+
+  .right {
+    @extend %eye;
+    right: 0;
+  }
+}
+
+.eye-circle {
+  @extend %abs;
+  width: 100px;
+  height: 80px;
+
+  background-color: $colorWhite;
+  border: 2px solid #482507;
+  border-radius: 50% 50% 40% 40%;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.eye-core {
+  @extend %abs;
+  left: 50%;
+  height: 55px;
+  width: 46px;
+  margin-left: -23px;
+
+  border-radius: 50% 50% 50% 50%;
+  background-color: black;
+}
+
+.eye-bottom {
+  @extend %abs;
+  height: 50px;
+  width: 100px;
+  margin-top: 48px;
+
+  border-top: 2px solid #46240b;
+  border-radius: 40% 40% 50% 50%;
+  background-color: $colorWhite;
+}
+
+.face-red {
+  @extend %abs;
+  height: 20px;
+  width: 70px;
+  top: 45px;
+  left: 18px;
+
+  border-radius: 50% 50% 50% 50%;
+  background-color: $colorRed;
+  opacity: 0;
+}
+
+/* 鼻子 */
+.nose {
+  @extend %abs;
+  top: 154px;
+  left: 50%;
+  margin-left: -10px;
+  width: 20px;
+  height: 10px;
+
+  border-bottom: 8px solid #000;
+  border-radius: 0 0 50% 50%;
+}
+
+/* 嘴巴 */
+.mouth-wrap {
+  $mouthBorder: 4px solid black;
+
+  @extend %abs;
+  left: 50%;
+  top: 168px;
+  width: 80px;
+  height: 20px;
+  margin-left: -40px;
+
+  overflow: hidden;
+
+  %mouth {
+    @extend %abs;
+    top: 0;
+    width: 40px;
+    height: 40px;
+    margin-top: -26px;
+
+    border-bottom: $mouthBorder;
+
+    transform: scaleX(1) rotate(0) translate(0, 0);
+    transition: transform .5s;
+  }
+
+  .left {
+    @extend %mouth;
+    left: 0;
+
+    border-right: $mouthBorder;
+    border-radius: 0 40% 70% 20%;
+  }
+
+  .right {
+    @extend %mouth;
+    right: 0;
+
+    border-left: $mouthBorder;
+    border-radius: 40% 0 20% 70%;
+  }
+}
+
+// face hover
+.face:hover {
+
+  // 脸型动画
+  &.transition {
+    border-radius: 50% 50% 40% 40%;
+  }
+
+  // 嘴巴动画
+  .mouth-wrap {
+    .left {
+      transform: scaleX(.7) rotate(20deg) translate(6px, -3px);
+    }
+
+    .right {
+      transform: scaleX(.7) rotate(-20deg) translate(-6px, -3px);
+    }
+  }
+}
 
 
 
