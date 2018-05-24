@@ -2,6 +2,22 @@ doctype html
 html(lang='en')
   head
     include includes/meta.pug
-    title IFE2018
+    title No.6 - 利用 CSS animation 制作一个炫酷的 Slider
 
   body
+    .container
+      - var n = 0;
+
+      .pic
+        while n < 5
+          img(src=require("../images/p" + (++n) + ".jpg"),
+          alt="pic" + n)
+
+      - n = 0;
+
+      .thumb
+        while n < 5
+          img(src=require("../images/p" + (++n) + ".jpg"),
+          alt="thumb" + n,
+          data-index=n)
+

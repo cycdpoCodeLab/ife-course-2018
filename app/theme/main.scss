@@ -28,6 +28,117 @@ body {
  * Main Frame
  *---------------------------*/
 
+.container {
+  @extend %fullContainer;
+}
+
+// 设定5个图片的关键帧
+@keyframes pic1Ani {
+  from {
+    transform: translateX(-500px);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pic2Ani {
+  from {
+    transform: translateY(350px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes pic3Ani {
+  from {
+    transform: scale(.1);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes pic4Ani {
+  from {
+    transform: scale(2);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes pic5Ani {
+  from {
+    transform: rotate(-360deg) scale(.1);
+  }
+  to {
+    transform: rotate(0) scale(1);
+  }
+}
+
+.pic {
+  @extend %fullContainer;
+
+  > img {
+    @include fix-center(-100%);
+    width: auto;
+    height: 100%;
+
+    // 5张图片的动画效果
+    // animation: name duration timing-function delay iteration-count direction;
+    &.active {
+      &:nth-child(1) {
+        animation: pic1Ani .5s ease-out;
+        animation-fill-mode: both;
+      }
+      &:nth-child(2) {
+        animation: pic2Ani .5s ease-out;
+        animation-fill-mode: both;
+      }
+      &:nth-child(3) {
+        animation: pic3Ani 1s ease-in;
+        animation-fill-mode: both;
+      }
+      &:nth-child(4) {
+        animation: pic4Ani 1s ease-out;
+        animation-fill-mode: both;
+      }
+      &:nth-child(5) {
+        animation: pic5Ani .7s ease-in-out;
+        animation-fill-mode: both;
+      }
+    }
+  }
+}
+
+.thumb {
+  $thumbH: 100px;
+
+  @extend %abs;
+  left: 0;
+  bottom: 20px;
+  z-index: 9999;
+
+  @extend %flexCenter;
+  width: 100%;
+  height: $thumbH;
+
+  > img {
+    width: auto;
+    height: $thumbH;
+    margin: 0 5px;
+    box-shadow: 0 0 4px rgba(black, .2);
+
+    opacity: .6;
+    transition: opacity .2s;
+
+    &.active {
+      opacity: 1;
+    }
+  }
+}
 
 
 
