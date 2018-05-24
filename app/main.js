@@ -1,3 +1,5 @@
+// 这个js只是用来打包scss，没有其他用处
+
 // global css
 import './theme/main.scss';
 
