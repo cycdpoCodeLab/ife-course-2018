@@ -44,7 +44,7 @@ body {
   background: $colorWhite;
   overflow: hidden;
 
-  // 修复加载时变形动画
+  // 修复页面第一次加载时变形动画
   &.transition {
     transition: border-radius .5s;
   }
@@ -56,7 +56,7 @@ body {
   left: 50%;
   width: 300px;
   margin-left: -150px;
-  margin-top: 20px;
+  margin-top: 22px;
 
   %ear {
     @extend %abs;
@@ -64,20 +64,29 @@ body {
     width: 80px;
     height: 100px;
     border: 2px solid black;
+
+    transform: rotate(0);
+    transition: transform .6s cubic-bezier(.3, .07, .75, 1.32);
   }
 
   .left {
     @extend %ear;
     left: 0;
     background-color: $colorWhite;
-    border-radius: 100% 10% 50% 0;
+    border-radius: 100% 10% 50% 20%;
+
+    // 设定左耳朵的旋转中心
+    transform-origin: 80% 60%;
   }
 
   .right {
     @extend %ear;
     right: 0;
-    border-radius: 10% 100% 0 50%;
+    border-radius: 10% 100% 20% 50%;
     background-color: $colorYellow;
+
+    // 设定右耳朵的旋转中心
+    transform-origin: 20% 60%;
   }
 }
 
@@ -143,6 +152,10 @@ body {
 
   border-radius: 50% 50% 50% 50%;
   background-color: black;
+
+  transform-origin: 50% 50%;
+  transform: scaleX(1);
+  transition: transform 1s;
 }
 
 .eye-bottom {
@@ -154,18 +167,26 @@ body {
   border-top: 2px solid #46240b;
   border-radius: 40% 40% 50% 50%;
   background-color: $colorWhite;
+
+  transform: translateY(0);
+  transition: transform 1s;
 }
 
 .face-red {
   @extend %abs;
-  height: 20px;
-  width: 70px;
-  top: 45px;
-  left: 18px;
+  height: 14px;
+  width: 50px;
+  top: 55px;
+  left: 28px;
 
   border-radius: 50% 50% 50% 50%;
   background-color: $colorRed;
+
   opacity: 0;
+
+  &.transition {
+    transition: opacity 1s;
+  }
 }
 
 /* 鼻子 */
@@ -204,7 +225,11 @@ body {
     border-bottom: $mouthBorder;
 
     transform: scaleX(1) rotate(0) translate(0, 0);
-    transition: transform .5s;
+
+    // 修复页面第一次加载时变形动画
+    &.transition {
+      transition: border-radius .5s;
+    }
   }
 
   .left {
@@ -212,7 +237,7 @@ body {
     left: 0;
 
     border-right: $mouthBorder;
-    border-radius: 0 40% 70% 20%;
+    border-radius: 0 40% 50% 20%;
   }
 
   .right {
@@ -220,7 +245,7 @@ body {
     right: 0;
 
     border-left: $mouthBorder;
-    border-radius: 40% 0 20% 70%;
+    border-radius: 40% 0 20% 50%;
   }
 }
 
@@ -229,17 +254,46 @@ body {
 
   // 脸型动画
   &.transition {
-    border-radius: 50% 50% 40% 40%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 35%;
+  }
+
+  + .ear-wrap {
+    .left {
+      transform: rotate(-30deg);
+    }
+    .right {
+      transform: rotate(30deg);
+    }
+  }
+
+  // 眼睛动画
+  .eye-core {
+    transform: scaleX(.85);
+  }
+
+  .eye-bottom {
+    transform: translateY(-15px);
+  }
+
+  .face-red {
+    &.transition {
+      opacity: .5;
+    }
   }
 
   // 嘴巴动画
   .mouth-wrap {
     .left {
-      transform: scaleX(.7) rotate(20deg) translate(6px, -3px);
+      &.transition {
+        border-bottom-left-radius: 50%;
+      }
     }
 
     .right {
-      transform: scaleX(.7) rotate(-20deg) translate(-6px, -3px);
+      &.transition {
+        border-bottom-right-radius: 50%;
+      }
     }
   }
 }
