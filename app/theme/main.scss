@@ -28,6 +28,86 @@ body {
  * Main Frame
  *---------------------------*/
 
+.stage {
+  @extend %fullContainer;
+  @extend %flexCenter;
+
+  // 设定景深
+  perspective: 400px;
+}
+
+$squareEdge: 200px;
+
+
+// 设定绕着Y轴顺时针旋转的动画关键帧
+@keyframes rotateY {
+  from {
+    transform: rotateY(0);
+  }
+
+  to {
+    transform: rotateY(-360deg);
+  }
+}
+
+.container {
+  @extend %rel;
+  height: $squareEdge;
+  width: $squareEdge;
+
+  // 开启3D模式
+  transform-style: preserve-3d;
+  perspective-origin: 50% 50%;
+
+  // 初始值
+  transform: rotateY(0);
+
+  // 设定动画
+  // animation: name duration timing-function delay iteration-count direction;
+  animation: rotateY 10s linear infinite;
+  animation-play-state:paused;
+
+  // hover时执行动画
+  &:hover {
+    animation-play-state:running;
+  }
+}
+
+.side {
+  $borderWidth: 1px;
+
+  @extend %abs;
+  width: $squareEdge - $borderWidth * 2;
+  height: $squareEdge - $borderWidth * 2;
+
+  border: $borderWidth solid $colorBlue;
+  background-color: rgba($colorBlue, .2);
+
+  // 盒子的6个面
+  &:nth-child(1) {
+    transform: rotateY(-90deg) translateZ(100px);
+  }
+
+  &:nth-child(2) {
+    transform: translateZ(100px);
+  }
+
+  &:nth-child(3) {
+    transform: rotateY(90deg) translateZ(100px);
+  }
+
+  &:nth-child(4) {
+    transform: rotateY(180deg) translateZ(100px);
+  }
+
+  &:nth-child(5) {
+    transform: rotateX(90deg) translateZ(100px);
+  }
+
+  &:nth-child(6) {
+    transform: rotateX(-90deg) translateZ(100px);
+  }
+}
 
 
 
