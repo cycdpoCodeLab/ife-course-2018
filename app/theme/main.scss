@@ -134,8 +134,16 @@ body {
     opacity: .6;
     transition: opacity .2s;
 
+    &:hover {
+      opacity: .8;
+    }
+
     &.active {
       opacity: 1;
+
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
