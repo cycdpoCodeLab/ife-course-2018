@@ -83,8 +83,10 @@ body {
 
   > img {
     @include fix-center(-100%);
-    width: auto;
-    height: 100%;
+
+    // 以宽度为基准全屏显示
+    width: 100%;
+    height: auto;
 
     // 5张图片的动画效果
     // animation: name duration timing-function delay iteration-count direction;
@@ -111,6 +113,14 @@ body {
       }
     }
   }
+
+  // 以高度为基准全屏显示
+  &.base-on-height {
+    > img {
+      width: auto;
+      height: 100%;
+    }
+  }
 }
 
 .thumb {
@@ -131,18 +141,18 @@ body {
     margin: 0 5px;
     box-shadow: 0 0 4px rgba(black, .2);
 
-    opacity: .6;
-    transition: opacity .2s;
+    filter: grayscale(50%) brightness(.3);
+    transition: filter .2s;
 
     &:hover {
-      opacity: .8;
+      filter: grayscale(50%) brightness(1);
     }
 
     &.active {
-      opacity: 1;
+      filter: brightness(.8);
 
       &:hover {
-        opacity: 1;
+        filter: brightness(1);
       }
     }
   }
