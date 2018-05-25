@@ -2,6 +2,34 @@ doctype html
 html(lang='en')
   head
     include includes/meta.pug
-    title IFE2018
+    title 使用 animate.css 实现一个优雅的登录框
+
+    //- animate css
+    link(href="https://cdn.jsdelivr.net/npm/animate.css@3/animate.min.css", rel="stylesheet")
 
   body
+    section.site-container
+      section.card
+        h3 Login
+        form(novalidate)
+          .form__wrapper
+            input#email.form__input.empty(type="email",
+            name="email")
+            label.form__label(for="email")
+              span.form__label__content Email
+          .form__error__msg 111
+
+          .form__wrapper
+            input#password.form__input.empty(type="password",
+            name="password")
+            label.form__label(for="password")
+              span.form__label__content Password
+          .form__error__msg
+
+          .form__wrapper__submit.pulse.infinite
+            .form__input__submit
+              button.btn(type="submit" name="submit") Submit
+
+    //- jquery
+    script(src="https://cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js")
+

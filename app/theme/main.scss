@@ -6,30 +6,178 @@
  *---------------------------*/
 @import "reset";
 
-html, body {
-  position: relative;
-  height: 100%;
-}
-
 html {
-  font-size: 100px;
-  line-height: 1.4;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  font-size: 62.5%;
+  font-family: 'Open Sans', 'Helvetica Neue', Arial, 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
 }
 
 body {
+  font-size: 1.8em;
+  line-height: 3;
   background-color: $bgc;
-  color: $fontColor;
-  font-size: $fontM;
-  font-family: -apple-system-font, "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+}
+
+h3 {
+  font-size: 1.8em;
+  margin: 1em 0 3rem;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+p {
+  margin-bottom: 1.5rem;
 }
 
 /*---------------------------
  * Main Frame
  *---------------------------*/
 
+.site-container {
+  max-width: 320px;
+  margin: 10px auto;
+  padding: 3% .6em;
 
+  @media screen and (min-width: 60.063em) {
+    max-width: 400px;
+  }
+}
 
+.card {
+  @extend %rel;
+  padding: 1em 1.5em;
+  overflow: hidden;
+
+  background-color: white;
+  box-shadow: 0 1px 3px 0 rgba(black, .24), 0 1px 18px 0 rgba(black, .12);
+  border-radius: 2px;
+}
+
+.form__wrapper {
+  @extend %rel;
+  display: inline-block;
+  overflow: hidden;
+  width: 100%;
+  margin-bottom: 1.6rem;
+  vertical-align: top;
+}
+
+.form__wrapper__submit {
+  padding: 1.6rem 0;
+}
+
+.form__input {
+  @extend %rel;
+  display: block;
+
+  margin-top: 1em;
+  padding: .84em 0;
+  width: 100%;
+  box-sizing: border-box;
+
+  color: $fontColor;
+  font-size: 1.6rem;
+  outline: 0;
+  border: none;
+  border-bottom: solid 1px #ddd;
+
+  // 输入框为空时
+  &.empty {
+    + .form__label {
+      .form__label__content {
+        transform: scale(1) translateY(0);
+      }
+    }
+  }
+
+  // 输入框激活状态
+  &:focus {
+    + .form__label {
+      // 蓝线出现
+      &::after {
+        transform: scaleX(1);
+      }
+
+      // 文字缩小并推到上面
+      .form__label__content {
+        transform: scale(.8) translateY(-10px);
+      }
+    }
+  }
+}
+
+.form__label {
+  @extend %fullContainer;
+  display: block;
+
+  pointer-events: none;
+  color: $fontColorGray;
+
+  &::after {
+    content: "";
+    @extend %abs;
+    z-index: 20;
+    display: block;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+
+    background-color: $colorBlue;
+
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform .3s cubic-bezier(.43, .43, .24, 1);
+  }
+}
+
+.form__label__content {
+  @extend %abs;
+  left: 0;
+  top: 0;
+
+  transform-origin: left top;
+  transform: scale(.8) translateY(-10px);
+  transition: transform .4s cubic-bezier(.09, .24, .24, 1);
+}
+
+// 错误提示框
+.form__error__msg {
+  display: none;
+  width: 100%;
+  margin: -1rem 0 1.2rem;
+
+  font-size: 1.3rem;
+  line-height: 1.2;
+  color: $colorRed;
+  font-weight: 700;
+
+  &.show {
+    display: block;
+  }
+}
+
+.btn {
+  display: inline-block;
+  width: 100%;
+  padding: .7em 1.5em;
+
+  border-radius: 2px;
+  background-color: $colorBlue;
+  box-shadow: 0 1px 3px 0 rgba(3, 30, 51, 0.24), 0 1px 2px 0 rgba(3, 30, 51, 0.12);
+  border: 0;
+  outline: none;
+  cursor: pointer;
+
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: white;
+  transition: all 0.2s ease;
+
+  &:focus,
+  &:hover {
+    background-color: darken($colorBlue, 5%);
+  }
+}
 
 
 

@@ -13,6 +13,7 @@ const
 module.exports = {
   entry: {
     'main': [
+      'jquery',
       path.resolve('app', 'main.js'),
     ],
   },
@@ -28,7 +29,9 @@ module.exports = {
     publicPath: './',
   },
 
-  externals: {},
+  externals: {
+    jquery: '$'
+  },
 
   resolve: {
     modules: [
@@ -36,7 +39,9 @@ module.exports = {
       path.resolve('node_modules'),
       path.resolve('static'),
     ],
-    'alias': {},
+    'alias': {
+      'jquery': path.resolve('node_modules', 'jquery', 'dist', 'jquery.js'),
+    },
     'extensions': ['.js']
   },
 
