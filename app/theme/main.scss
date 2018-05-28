@@ -28,9 +28,50 @@ body {
  * Main Frame
  *---------------------------*/
 .header {
-  margin: 30px 0;
+  margin-bottom: 30px;
+  padding: 30px 0;
   width: 100%;
   height: 400px;
+
+  background-color: $darkBgc;
+}
+
+.card {
+  display: block;
+  width: 250px;
+  margin: 0 auto;
+
+  background-color: white;
+  border-radius: 5px;
+  overflow: hidden;
+
+  transform: translateY(0);
+  box-shadow: 0 1px 2px rgba($darkBgc, 0.1), 0 5px 15px rgba($darkBgc, 0.05);
+  transition: all .6s;
+
+  // 上移并且阴影变大
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 1px 20px rgba($darkBgc, 0.1), 0 5px 30px rgba($darkBgc, 0.1);
+  }
+
+  h3 {
+    margin: 20px;
+    font-size: $fontL;
+    font-weight: 700;
+  }
+
+  p {
+    margin: 0 20px 30px;
+    font-size: $fontS;
+  }
+}
+
+.pattern {
+  width: 100%;
+  height: 120px;
+  padding: 20px 0;
+  background-color: $darkBgc;
 }
 
 

@@ -8,3 +8,4 @@
 ## Tips
 * [AE插件Bodymovin.zxp的安装与使用](https://www.jianshu.com/p/9a1500571269)
 * [bodymovin导出json文件无法读取出渐变信息和图形文件的相切信息，怎么办？](https://www.zhihu.com/question/68094816/answer/265032574)
+* [AE CC 2017 中英文语言切换方法](https://www.cgown.com/cg/adobe/23075.html)
