@@ -55,6 +55,18 @@ module.exports = {
         loader: 'babel-loader',
       },
 
+      // Scripts
+      {
+        test: /\.san$/,
+        include: [
+          path.resolve('app')
+        ],
+        exclude: [
+          path.resolve('node_modules'),
+        ],
+        loader: 'san-loader',
+      },
+
       // Pug template
       {
         test: /\.pug$/,
