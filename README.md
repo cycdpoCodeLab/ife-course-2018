@@ -10,7 +10,7 @@
   2. 控制变量
   3. 最小化复现问题
 2. 问谷歌(尽可能用英语 | 练习使用更精准的描述)
-3. 在正确的地方提问(技术性问题就在 (StackOverflow)[https://stackoverflow.com] 问)
+3. 在正确的地方提问(技术性问题就在 [StackOverflow](https://stackoverflow.com) 问)
 4. 技术提问要素清单
   1. 描述你的问题
   2. 展示你的尝试
