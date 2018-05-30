@@ -26,11 +26,95 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
-  margin: 30px auto;
-
-  font-size: 2em;
-  font-weight: 700;
-  text-align: center;
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+$defaultBorder: 1px solid $fontColor;
+$mainW: 480px;
+
+// 输入框
+.input-wrapper {
+  display: flex;
+  width: $mainW;
+  margin: 50px 0 20px;
+
+  > input {
+    flex: 1;
+    padding: 0 10px;
+    width: ($mainW - 20px) / 3 - 20px - 2px;
+    height: 40px;
+    margin-left: 10px;
+
+    border: $defaultBorder;
+    border-radius: 5px;
+
+    // 去除number类型默认样式
+    &[type="number"] {
+      -moz-appearance: textfield;
+
+      &::-webkit-inner-spin-button,
+      &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+      }
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+// 移除信息按钮
+.remove-info-btn {
+  width: $mainW;
+  padding: 10px 0;
+
+  border-radius: 5px;
+  background-color: $fontColor;
+  color: $bgc;
+
+  &:hover {
+    background-color: lighten($fontColor, 4%);
+  }
+}
+
+// 信息显示区
+.info-wrapper {
+  @extend %flexCenter;
+  flex-direction: column;
+  width: $mainW;
+  margin-top: 80px;
+  padding: 20px 0;
+
+  border: $defaultBorder;
+  border-radius: 5px;
+
+  > p {
+    display: flex;
+    width: $mainW * .5;
+    padding: 10px;
+
+    > span {
+      display: block;
+      height: 20px;
+      line-height: 20px;
+
+      &:last-child {
+        flex: 1;
+        margin-left: 10px;
+        display: flex;
+        align-items: center;
+
+        // 文本溢出
+        overflow: hidden;
+        text-overflow:ellipsis;
+        white-space: nowrap;
+
+        border-bottom: $defaultBorder;
+      }
+    }
+  }
+}
