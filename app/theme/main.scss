@@ -26,11 +26,59 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
-  margin: 30px auto;
-
-  font-size: 2em;
-  font-weight: 700;
-  text-align: center;
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+$mainW: 480px;
+$defaultBorder: 1px solid $fontColor;
+
+%commonButton {
+  padding: 10px;
+
+  border-radius: 5px;
+  background-color: $fontColor;
+  color: $bgc;
+
+  &:hover {
+    background-color: lighten($fontColor, 4%);
+  }
+}
+
+.add-btn {
+  width: $mainW;
+  margin: 30px;
+  @extend %commonButton;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.table {
+  width: $mainW;
+  text-align: center;
+  border-collapse: collapse;
+
+  th {
+    height: 40px;
+    border-bottom: 2px solid $fontColor;
+  }
+
+  td {
+    height: 40px;
+    border-bottom: $defaultBorder;
+  }
+
+  tr:last-child {
+    td {
+      border-bottom: none;
+    }
+  }
+
+  button {
+    @extend %commonButton;
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+}
