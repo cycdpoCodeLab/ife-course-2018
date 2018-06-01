@@ -26,11 +26,72 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
-  margin: 30px auto;
 
-  font-size: 2em;
-  font-weight: 700;
-  text-align: center;
+$mainW: 480px;
+$defaultBorder: 1px solid $fontColor;
+
+.root {
+  width: $mainW;
+  margin: 50px auto;
 }
 
+%wrapper {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.child {
+  @extend %wrapper;
+  display: flex;
+  align-items: center;
+
+  > input {
+    border: $defaultBorder;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+  }
+
+  > button {
+    padding: 10px;
+
+    border-radius: 5px;
+    background-color: $fontColor;
+    color: $bgc;
+
+    &:hover {
+      background-color: lighten($fontColor, 4%);
+    }
+  }
+}
+
+%parentTextWrapper {
+  @extend %wrapper;
+  display: flex;
+
+  span {
+    display: block;
+  }
+
+  input {
+    flex: 1;
+    outline: none;
+    cursor: text;
+  }
+}
+
+.parent {
+  @extend %parentTextWrapper;
+
+  &.changed {
+    color: green;
+  }
+}
+
+.higherParent {
+  @extend %parentTextWrapper;
+
+  &.changed {
+    color: purple;
+  }
+}
