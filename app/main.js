@@ -41,21 +41,26 @@ let MyApp = san.defineComponent({
         value="{= emailValue =}"
         promptText="{{ promptEmail }}"
       />
+      
       <san-input
         on-blur="handlePhone"
         placeholder="请输入手机号"
         value="{= phoneValue =}"
         errorText="{{ errorPhone }}"
       />
+      
       <san-input
-          disabled
-          placeholder="禁用"
+        disabled
+        placeholder="禁用"
       />
       
       <h2>复选框</h2>
-      <san-checkbox value="errorrik" checked="{= online =}" trueValue="1" falseValue="0" on-change="handleChange">errorrik</san-checkbox>
-      <san-checkbox value="otakustay" checked="{= online =}" trueValue="1" falseValue="0" on-change="handleChange">otakustay</san-checkbox>
-      <san-checkbox value="firede" checked="{= online =}" trueValue="1" falseValue="0" on-change="handleChange">firede</san-checkbox>
+      <san-checkbox>选项1</san-checkbox>
+      <san-checkbox checked>选项2</san-checkbox>
+      <san-checkbox indeterminate>选项3</san-checkbox>
+      <san-checkbox disabled>无效</san-checkbox>
+      <san-checkbox checked disabled>必选</san-checkbox>
+      <san-checkbox indeterminate disabled>必选部分</san-checkbox>
     </div>
   `,
 
@@ -67,12 +72,7 @@ let MyApp = san.defineComponent({
       phoneValue: undefined,
       promptEmail: undefined,
       errorPhone: undefined,
-      online: []
     };
-  },
-
-  handleChange() {
-    console.log(this.data.get('online'));
   },
 
   handleEmail() {

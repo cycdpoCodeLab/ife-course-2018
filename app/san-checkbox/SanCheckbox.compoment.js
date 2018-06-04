@@ -4,13 +4,11 @@ import './sanCheckbox.scss';
 
 export default san.defineComponent({
   template: `
-  <template class="san-checkbox">
-    <input 
+  <template class="san-checkbox{{checked ? ' checked' : ''}}{{indeterminate ? ' indeterminate' : ''}}{{disabled ? ' disabled' : ''}}">
+    <span class="icon"></span>
+    <input
       type="checkbox"
       checked="{= checked =}"
-      value="{{ value }}"
-      trueValue="{{ trueValue }}"
-      falseValue="{{ falseValue }}"
       indeterminate="{{ indeterminate }}"
       disabled="{{ disabled }}"
       on-change="handleChange($event)"
@@ -20,9 +18,6 @@ export default san.defineComponent({
   `,
 
   initData() {
-
-    // let _value = undefined;
-
     return {
       checked: false,
       value: undefined,
@@ -32,8 +27,24 @@ export default san.defineComponent({
       indeterminate: false,
     };
   },
-
   handleChange(e) {
+    this.data.set('indeterminate', false);
+
+    let
+      trueValue = this.data.get('trueValue')
+      , falseValue = this.data.get('falseValue')
+      , checked = this.data.get('checked')
+      , _value
+    ;
+
+    if (checked) {
+      _value = trueValue ? trueValue : true;
+    } else {
+      _value = falseValue ? falseValue : false;
+    }
+
+    this.data.set('value', _value);
+
     this.fire('change', e);
   },
 });
