@@ -55,7 +55,7 @@ module.exports = {
         loader: 'babel-loader',
       },
 
-      // Scripts
+      // san
       {
         test: /\.san$/,
         include: [

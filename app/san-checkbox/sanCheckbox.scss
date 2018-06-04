@@ -1,0 +1,116 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+.san-input {
+  @extend %rel;
+  display: flex;
+  width: 300px;
+  margin: 30px 0;
+
+  /**
+   * 显示提示框
+   */
+  &.needPrompt {
+    input {
+      &,
+      &:hover,
+      &:focus {
+        border-color: red;
+      }
+    }
+
+    .prompt {
+      display: block;
+    }
+  }
+
+  /**
+   * 显示错误信息
+   */
+  &.needError {
+    input {
+      &,
+      &:hover,
+      &:focus {
+        border-color: red;
+      }
+    }
+
+    .error {
+      display: block;
+    }
+  }
+
+  input {
+    flex: 1;
+    padding: 8px;
+
+    color: $fontColor;
+    border: 1px solid lighten($fontColor, 30%);
+    font-size: 12px;
+
+    &::placeholder {
+      color: lighten($fontColor, 30%);
+    }
+
+    &:hover {
+      border-color: lighten($fontColor, 15%);
+    }
+
+    &:focus {
+      border-color: $fontColor;
+    }
+
+    &:disabled {
+      border-color: lighten($fontColor, 50%);
+      background-color: lighten($fontColor, 70%);
+      cursor: not-allowed;
+    }
+  }
+
+  // 提示框
+  .prompt {
+    $promptBgc: lighten(desaturate(red, 50%), 46%);
+
+    @extend %abs;
+    display: none;
+    left: 0;
+    top: -(12px + 10px * 2)-10px;
+
+    padding: 10px;
+    color: red;
+    background-color: $promptBgc;
+    font-size: 11px;
+    line-height: 12px;
+
+    // 小三角
+    > span {
+      @extend %abs;
+      display: block;
+      margin: auto;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+
+      width: 0;
+      height: 0;
+      border-width: 6px 4px 0;
+      border-style: solid;
+      border-color: $promptBgc transparent transparent;
+    }
+  }
+
+  // 错误
+  .error {
+    @extend %abs;
+    left: 300px;
+    top: 0;
+
+    display: none;
+    padding: 10px;
+    width: 100%;
+
+    font-size: 12px;
+    color: red;
+  }
+}
