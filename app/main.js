@@ -12,14 +12,29 @@ if (PRODUCTION) {
   console.log('Production Mode');
 }
 
+import TaskMenuComponent from './task-menu/TaskMenu.component';
+
 // 定义Component
 let MyApp = san.defineComponent({
-  template: `<h1 class="title">{{ hello }}</h1>`
+  components: {
+    'task-menu': TaskMenuComponent
+  },
+  template: `
+    <div class="root">
+      <!-- 标题 -->
+      <task-menu title="{{ title }}"></task-menu>
+      
+      <!-- 任务卡片 -->
+      <section class="task-card-wrapper">
+      
+      </section>
+    </div>
+  `
 });
 
 let myApp = new MyApp({
   data: {
-    hello: 'Hello World!'
+    title: '任务栏'
   }
 });
 
