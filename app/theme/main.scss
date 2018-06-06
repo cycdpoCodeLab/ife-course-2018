@@ -26,11 +26,43 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
-  margin: 30px auto;
 
-  font-size: 2em;
-  font-weight: 700;
-  text-align: center;
+$mainW: 480px;
+
+.root {
+  margin: 30px auto;
+  width: $mainW;
+
+  button {
+    display: block;
+    width: $mainW;
+    padding: 10px 0;
+    margin: 30px 0;
+
+    border-radius: 5px;
+    background-color: $fontColor;
+    color: $bgc;
+
+    &:hover {
+      background-color: lighten($fontColor, 4%);
+    }
+  }
+
+  span {
+    display: block;
+    width: $mainW;
+    padding: 40px 0;
+
+    background-color: $fontColor;
+    color: $bgc;
+    text-align: center;
+
+    transition: all .5s;
+    opacity: 0;
+
+    &.enter {
+      opacity: 1;
+    }
+  }
 }
 

@@ -14,14 +14,47 @@ if (PRODUCTION) {
 
 // 定义Component
 let MyApp = san.defineComponent({
-  template: `<h1 class="title">{{ hello }}</h1>`
-});
+  template: `
+  <div class="root">
+    <button on-click="toggle">TOGGLE</button>
+    <span s-if="show" s-transition="trans.opacity">
+      Transition Layer
+    </span>
+  </div>
+  `,
 
-let myApp = new MyApp({
-  data: {
-    hello: 'Hello World!'
+  initData() {
+    return {
+      show: true
+    };
+  },
+
+  toggle() {
+    this.data.set('show', !this.data.get('show'));
+  },
+
+  trans: {
+    opacity: {
+      enter: function (el, done) {
+        el.classList.add('enter');
+
+        el.addEventListener('transitionend', ()=>{
+          console.log('done');
+          done();
+        });
+      },
+
+      leave: function (el, done) {
+        el.classList.remove('enter');
+
+        el.addEventListener('transitionend', ()=>{
+          console.log('done');
+          done();
+        });
+      }
+    }
   }
 });
 
-myApp.attach(document.body);
+new MyApp().attach(document.body);
 
