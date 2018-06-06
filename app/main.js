@@ -36,21 +36,16 @@ let MyApp = san.defineComponent({
   trans: {
     opacity: {
       enter: function (el, done) {
-        el.classList.add('enter');
-
-        el.addEventListener('transitionend', ()=>{
-          console.log('done');
-          done();
-        });
+        // 将任务放入下一个列队，防止样式渲染异常
+        setTimeout(() => {
+          el.classList.add('enter');
+          el.addEventListener('transitionend', done);
+        }, 0);
       },
 
       leave: function (el, done) {
         el.classList.remove('enter');
-
-        el.addEventListener('transitionend', ()=>{
-          console.log('done');
-          done();
-        });
+        el.addEventListener('transitionend', done);
       }
     }
   }
