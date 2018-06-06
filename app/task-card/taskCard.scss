@@ -1,11 +1,76 @@
 @import '../theme/variables';
 @import '../theme/utilities';
 
-.task-card {
+$cardBgc: #fcf0e2;
 
+.task-card-wrapper {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.task-card {
+  @extend %rel;
+  @extend %flexCenter;
+  flex-direction: column;
   width: $mainW / 3;
   height: $mainW / 3;
-  background-color: white;
+
+  &::before {
+    content: "";
+    display: block;
+    width: $mainW / 3 - 40px;
+    height: $mainW / 3 - 40px;
+    @include fix-center(0);
+    z-index: 0;
+
+    background-color: $cardBgc;
+    box-shadow: 2px 2px 10px darken($bgc, 5%);
+    border-radius: 5px;
+  }
+
+  &::after {
+    content: "";
+    display: block;
+    width: $mainW / 3 - 60px;
+    height: $mainW / 3 - 60px;
+    @include fix-center(0);
+    z-index: 0;
+
+    border: 2px solid darken($cardBgc, 15%);
+  }
+
+  h3 {
+    @extend %rel;
+    @extend %flexCenter;
+    width: 100px;
+    height: 36px;
+    margin-bottom: 10px;
+
+    background: linear-gradient(to bottom, #f7cf1d, #f1b826);
+    border-radius: 3px;
+    font-size: 16px;
+    color: red;
+  }
+
+  .content {
+    @extend %rel;
+    @extend %flexCenter;
+    flex-direction: column;
+
+    width: 200px;
+    height: 200px / 468 * 327;
+
+    background: url("../../static/images/sticky.jpg") no-repeat;
+    background-size: 100% 100%;
+
+    > p {
+      width: 124px;
+      margin: 5px;
+
+      font-size: 14px;
+    }
+  }
 }
 
 
