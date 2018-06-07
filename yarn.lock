@@ -1730,6 +1730,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
+classnames@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
 clean-css@4.1.x, clean-css@^4.1.11:
   version "4.1.11"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.11.tgz#2ecdf145aba38f54740f26cefd0ff3e03e125d6a"
@@ -2593,6 +2597,10 @@ dir-glob@^2.0.0:
 doctypes@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/doctypes/-/doctypes-1.1.0.tgz#ea80b106a87538774e8a3a4a5afe293de489e0a9"
+
+dom-align@^1.6.2:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/dom-align/-/dom-align-1.7.0.tgz#95a8f91a8c6aaaef5908366c1c2c6271461bf2c3"
 
 dom-converter@~0.1:
   version "0.1.4"
@@ -4775,6 +4783,10 @@ kind-of@^6.0.0, kind-of@^6.0.2:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/kind-of/-/kind-of-6.0.2.tgz#01146b36a6218e64e58f3a8d66de5d7fc6f6d051"
 
+kolor@^1.1.9:
+  version "1.1.9"
+  resolved "https://registry.yarnpkg.com/kolor/-/kolor-1.1.9.tgz#bf7678f1848a3dcb5a947d41f626db59163385b6"
+
 lazy-cache@^1.0.3:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/lazy-cache/-/lazy-cache-1.0.4.tgz#a1d78fc3a50474cb80845d3b3b6e1da49a446e8e"
@@ -5356,6 +5368,10 @@ mixin-object@^2.0.1:
   resolved "https://registry.yarnpkg.com/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
   dependencies:
     minimist "0.0.8"
+
+moment@^2.18.1:
+  version "2.22.2"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
 
 move-concurrently@^1.0.1:
   version "1.0.1"
@@ -7067,6 +7083,20 @@ san-loader@^0.0.7:
     postcss "^6.0.13"
     postcss-selector-parser "^3.1.0"
     source-map "^0.6.1"
+
+san-mui@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/san-mui/-/san-mui-1.1.1.tgz#39e189cd8454bae830ce0ccf9ff44c6f59a69bfb"
+  dependencies:
+    classnames "^2.2.5"
+    dom-align "^1.6.2"
+    kolor "^1.1.9"
+    moment "^2.18.1"
+    san "^3.5.1"
+
+san@^3.5.1:
+  version "3.6.0"
+  resolved "https://registry.yarnpkg.com/san/-/san-3.6.0.tgz#5e7c651d92ea48881ce965ca85f24760181df7fa"
 
 san@^3.5.11:
   version "3.5.11"

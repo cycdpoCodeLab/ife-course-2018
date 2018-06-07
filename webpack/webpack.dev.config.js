@@ -36,6 +36,16 @@ module.exports = webpackMerge(webpackBase, {
         ]
       },
 
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: 'style-loader'
+          },
+          styleLoadersConfig.cssLoader,
+        ]
+      },
+
       // Pictures
       {
         test: /\.(jpe?g|png|gif|svg)$/i,
@@ -78,9 +88,9 @@ module.exports = webpackMerge(webpackBase, {
       // Font
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        exclude: [
-          path.resolve('node_modules'),
-        ],
+        // exclude: [
+        //   path.resolve('node_modules'),
+        // ],
         use: [
           {
             loader: 'file-loader',

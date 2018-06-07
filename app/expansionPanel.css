@@ -1,0 +1,176 @@
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url("../node_modules/san-mui/lib/common/font/MaterialIcons-Regular.eot"); /* For IE6-8 */
+  src: local('Material Icons'), local('../node_modules/san-mui/lib/common/font/MaterialIcons-Regular'), url("../node_modules/san-mui/lib/common/font/MaterialIcons-Regular.woff2") format('woff2'), url("../node_modules/san-mui/lib/common/font/MaterialIcons-Regular.woff") format('woff'), url("../node_modules/san-mui/lib/common/font/MaterialIcons-Regular.ttf") format('truetype');
+}
+
+.sm-button {
+  position: relative;
+  box-sizing: border-box;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 36px;
+  padding: 0 16px;
+  line-height: 36px;
+  background-color: #fff;
+  border: none;
+  outline: none;
+  font-family: Roboto;
+  font-size: 14px;
+  border-radius: 2px;
+  color: #2196f3;
+  text-transform: uppercase;
+  overflow: hidden;
+  text-decoration: none;
+  vertical-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  color: #424242;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.sm-button:hover {
+  color: #424242;
+  background-color: rgba(153, 153, 153, 0.2);
+}
+
+.sm-button:active {
+  color: #424242;
+  background-color: rgba(153, 153, 153, 0.4);
+}
+
+.sm-button > .sm-icon {
+  font-size: 0.75em;
+}
+
+.sm-button.variant-icon {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border-radius: 50%;
+}
+
+.sm-center-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.sm-icon {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  -webkit-font-feature-settings: 'liga';
+  font-feature-settings: 'liga';
+}
+
+.sm-expansion-panel {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 2px;
+}
+
+.sm-expansion-panel-header {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  box-sizing: border-box;
+  max-height: 48px;
+  min-height: 48px;
+  padding: 0 24px;
+  border-radius: 2px;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-transition: max-height 0.3s, -webkit-transform 0.3s;
+  transition: max-height 0.3s, -webkit-transform 0.3s;
+  transition: max-height 0.3s, transform 0.3s;
+  transition: max-height 0.3s, transform 0.3s, -webkit-transform 0.3s;
+}
+
+.sm-expansion-panel-header > .sm-icon {
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.sm-expansion-panel-title {
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  font-size: 15px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.sm-expansion-panel-description {
+  -webkit-box-flex: 2;
+  -webkit-flex: 2 1 auto;
+  -ms-flex: 2 1 auto;
+  flex: 2 1 auto;
+  margin-left: 16px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.54);
+}
+
+.sm-expansion-panel-content {
+  border-top: 0;
+  -webkit-transition: max-height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+  transition: max-height 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+  transition: max-height 0.3s, opacity 0.3s, transform 0.3s;
+  transition: max-height 0.3s, opacity 0.3s, transform 0.3s, -webkit-transform 0.3s;
+  -webkit-transform-origin: top left;
+  -ms-transform-origin: top left;
+  transform-origin: top left;
+}
+
+.sm-expansion-panel.state-open {
+  margin: 16px 0;
+}
+
+.sm-expansion-panel.state-open .sm-expansion-panel-header {
+  max-height: 64px;
+  min-height: 64px;
+}
+
+.sm-expansion-panel.state-open .sm-expansion-panel-content {
+  padding: 0 24px 16px;
+}

@@ -26,11 +26,24 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
+.root {
   margin: 30px auto;
 
-  font-size: 2em;
-  font-weight: 700;
-  text-align: center;
+  width: 480px;
 }
 
+.my-button {
+  width: 100%;
+  padding: 15px 0;
+  margin: 30px 0;
+
+  border-radius: 5px;
+  background-color: $fontColor;
+  color: $bgc;
+  text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($fontColor, 4%);
+  }
+}

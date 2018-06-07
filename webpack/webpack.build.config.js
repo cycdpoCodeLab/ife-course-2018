@@ -76,6 +76,16 @@ module.exports = webpackMerge(webpackBase, {
           ],
         })
       },
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          publicPath: '../',  // fix images url bug
+          use: [
+            styleLoadersConfig.cssLoader
+          ],
+        })
+      },
 
       // Pictures
       {
@@ -145,9 +155,6 @@ module.exports = webpackMerge(webpackBase, {
       // Font
       {
         test: /\.(eot|ttf|woff|woff2)$/,
-        exclude: [
-          path.resolve('node_modules'),
-        ],
         use: [
           {
             loader: 'url-loader',
