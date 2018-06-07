@@ -361,7 +361,7 @@ arrify@^1.0.0, arrify@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
-asap@~2.0.3:
+asap@^2.0.6, asap@~2.0.3:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
 
@@ -7067,6 +7067,12 @@ san-loader@^0.0.7:
     postcss "^6.0.13"
     postcss-selector-parser "^3.1.0"
     source-map "^0.6.1"
+
+san-transition@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/san-transition/-/san-transition-1.1.0.tgz#c39db637869857f8f00438001ee60e9824f56563"
+  dependencies:
+    asap "^2.0.6"
 
 san@^3.5.11:
   version "3.5.11"

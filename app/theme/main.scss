@@ -26,11 +26,89 @@ body {
 /*---------------------------
  * Main Frame
  *---------------------------*/
-.title {
-  margin: 30px auto;
+$mainW: 480px;
 
-  font-size: 2em;
-  font-weight: 700;
+%commonBlock {
+  border-radius: 5px;
+  background-color: $fontColor;
+  color: $bgc;
   text-align: center;
+  cursor: pointer;
+
+  &:hover {
+    background-color: lighten($fontColor, 4%);
+  }
+}
+
+.root {
+  $listHeight: 40px;
+  $listSpace: 10px;
+
+  @extend %rel;
+  margin: 30px auto;
+  width: $mainW;
+
+  // 高度为4个li,3条空隙(这边为了方便直接写死，项目中可以直接用JS算动态的值)
+  height: $listHeight * 4 + $listSpace * 3;
+
+  li {
+    @extend %abs;
+    left: 0;
+    width: $mainW;
+    height: $listHeight;
+    @extend %commonBlock;
+
+    line-height: $listHeight;
+
+    // 计算每个li的top值
+    // 这边为了方便直接写死4个li的top值，实际中如有需要用JS计算动态的值
+    @for $i from 0 through 3 {
+      &[data-index="#{$i}"] {
+        top: ($listHeight + $listSpace) * $i;
+      }
+    }
+  }
+}
+
+// list transition style
+.list-enter,
+.list-leave {
+  transition: all .5s;
+}
+
+.list-enter,
+.list-before-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.list-before-enter,
+.list-leave {
+  opacity: 0;
+  transform: translate(-100px, 0);
+}
+
+// list transition style
+.details {
+  @extend %fullContainer;
+  @extend %flexCenter;
+  @extend %commonBlock;
+}
+
+.details-enter,
+.details-leave {
+  transition: all .5s;
+}
+
+.details-enter,
+.details-before-leave {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.details-before-enter,
+.details-leave {
+  opacity: 0;
+  transform: translate(100px, 0);
 }
 
