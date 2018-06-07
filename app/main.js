@@ -36,16 +36,33 @@ let MyApp = san.defineComponent({
   trans: {
     opacity: {
       enter: function (el, done) {
+        el.classList.add('before-enter');
+
         // 将任务放入下一个列队，防止样式渲染异常
         setTimeout(() => {
           el.classList.add('enter');
-          el.addEventListener('transitionend', done);
+          el.classList.remove('before-enter');
         }, 0);
+
+        el.addEventListener('transitionend', () => {
+          el.classList.remove('enter');
+          done();
+        });
       },
 
       leave: function (el, done) {
-        el.classList.remove('enter');
-        el.addEventListener('transitionend', done);
+        el.classList.add('before-leave');
+
+        // 将任务放入下一个列队，防止样式渲染异常
+        setTimeout(() => {
+          el.classList.add('leave');
+          el.classList.remove('before-leave');
+        }, 0);
+
+        el.addEventListener('transitionend', () => {
+          el.classList.remove('leave');
+          done();
+        });
       }
     }
   }

@@ -56,13 +56,19 @@ $mainW: 480px;
     background-color: $fontColor;
     color: $bgc;
     text-align: center;
-
-    transition: all .5s;
-    opacity: 0;
-
-    &.enter {
-      opacity: 1;
-    }
   }
+}
+
+// Transition style
+.enter, .leave {
+  transition: all .5s;
+}
+
+.before-enter, .leave {
+  opacity: 0;
+}
+
+.enter, .before-leave {
+  opacity: 1;
 }
 
