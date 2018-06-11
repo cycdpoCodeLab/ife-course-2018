@@ -1,0 +1,125 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+$wrapperW: 240px;
+$wrapperH: 40px;
+$selectorH: 200px;
+$selectorW: 160px;
+
+%iconBg {
+  @extend %abs;
+  content: '';
+  display: block;
+  top: 0;
+  right: 10px;
+  bottom: 0;
+  margin: auto;
+  width: 14px;
+  height: 14px;
+
+  background: url("../../static/images/arrow_down.svg") no-repeat;
+  background-size: 100% 100%;
+  opacity: .3;
+}
+
+.csacader-wrapper {
+  @extend %rel;
+  height: $wrapperH;
+  width: $wrapperW;
+}
+
+.input {
+  @extend %abs;
+  top: 0;
+  left: 0;
+  height: $wrapperH - 2px;
+  width: $wrapperW - 2px - 10px;
+
+  line-height: $wrapperH - 2px;
+  padding-left: 10px;
+
+  border: 1px solid lighten($fontColor, 40%);
+  border-radius: 5px;
+
+  cursor: pointer;
+
+  &::after {
+    @extend %iconBg;
+
+    transform-origin: 50% 50%;
+    transform: rotate(0);
+    transition: transform .2s;
+  }
+
+  &.box-show {
+    &::after {
+      transform: rotate(180deg);
+    }
+  }
+}
+
+.selector-box {
+  @extend %abs;
+  top: $wrapperH + 16px;
+  left: 0;
+  height: $selectorH;
+  display: flex;
+  flex-wrap: nowrap;
+
+  background: $bgc;
+  filter: drop-shadow(0 0 2px rgba(black, .2));
+
+  &::before {
+    content: '';
+    display: block;
+    @extend %abs;
+    left: 20px;
+    top: -6px;
+
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 6px solid $bgc;
+  }
+}
+
+.selector-wrapper {
+  display: flex;
+  flex-wrap: nowrap;
+  width: auto;
+  height: $selectorH;
+}
+
+.selector {
+  display: inline-block;
+  width: auto;
+  height: $selectorH;
+
+  + .selector-wrapper {
+    border-left: 1px solid lighten($fontColor, 50%);
+  }
+
+  li {
+    @extend %rel;
+    padding: 10px 20px;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    cursor: pointer;
+
+    &.has-children {
+      padding-right: 50px;
+
+      &::after {
+        @extend %iconBg;
+        transform: rotate(-90deg);
+      }
+    }
+
+    &:hover {
+      background-color: darken($bgc, 2%);
+    }
+  }
+}
