@@ -1,0 +1,72 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+$wrapperW: 240px;
+$wrapperH: 40px;
+$selectorH: 200px;
+$selectorW: 160px;
+
+%iconBg {
+  @extend %abs;
+  content: '';
+  display: block;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 24px;
+  height: 24px;
+
+  opacity: .3;
+}
+
+.data-picker-wrapper {
+  @extend %rel;
+  height: $wrapperH;
+  width: $wrapperW;
+}
+
+.input {
+  @extend %abs;
+  top: 0;
+  left: 0;
+  height: $wrapperH - 2px;
+  width: $wrapperW - 2px - 40px - 40px;
+
+  line-height: $wrapperH - 2px;
+  padding-left: 40px;
+  padding-right: 40px;
+
+  border: 1px solid lighten($fontColor, 40%);
+  border-radius: 5px;
+  cursor: pointer;
+
+  // 日期图标
+  &::before {
+    content: '';
+    @extend %iconBg;
+    left: 8px;
+
+    background: url("../../static/images/icon_date.svg") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  &.box-show {
+    border-color: lighten($colorBlue, 10%);
+  }
+
+  &:hover {
+    .delete-btn {
+      @extend %iconBg;
+      right: 8px;
+
+      background: url("../../static/images/icon_delete.svg") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+}
+
+.unchecked {
+  color: lighten($fontColor, 30%);
+}
+
+
