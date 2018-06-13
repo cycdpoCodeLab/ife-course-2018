@@ -1,0 +1,22 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+
+$wrapperW: 240px;
+$wrapperH: 40px;
+$selectorW: 340px;
+$cellW: 40px;
+$cellH: 32px;
+
+%iconBg {
+  @extend %abs;
+  display: block;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: 24px;
+  height: 24px;
+
+  opacity: .3;
+}
+

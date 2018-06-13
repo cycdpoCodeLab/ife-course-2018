@@ -23,15 +23,14 @@ let MyApp = san.defineComponent({
     <p>{{ explain }}</p>
     <h2>{{ title }}</h2>
     <data-picker
-      date="{{ date }}"
+      value="{{ date }}"
     ></data-picker>
   </div>
   `,
 
   initData() {
     return {
-      date: 0,
-      isBoxShow: false,
+      date: '',
     };
   },
 });

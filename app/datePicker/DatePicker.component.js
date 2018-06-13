@@ -1,8 +1,12 @@
 import san from 'san';
 
-import './dataPicker.scss';
+import './datePicker.scss';
 
 import SelectorBoxComponent from './SelectorBox.component';
+
+import {
+  dateToStr
+} from './date.funcs';
 
 export default san.defineComponent({
   components: {
@@ -22,6 +26,9 @@ export default san.defineComponent({
     <selector-box
       s-if="isBoxShow"
       s-transition="trans.selectorBox"
+      value="{= value =}"
+      today="{{ today }}"
+      isBoxShow="{= isBoxShow =}"
     >
     </selector-box>
   </div>
@@ -29,16 +36,27 @@ export default san.defineComponent({
 
   initData() {
     return {
-      date: '',
-      todayTime: 0,
       value: '',
       isBoxShow: false,
+      today: ''
     };
   },
 
-  inited() {
+  attached() {
     // 模拟blur
     document.body.addEventListener('click', () => this.data.set('isBoxShow', false));
+
+    // 滚动条事件
+    window.addEventListener('scroll', e => {
+      if(!this.data.get('isBoxShow')) {
+        return;
+      }
+
+      console.log(e);
+    });
+
+    // 赋值今天日期
+    this.data.set('today', dateToStr(new Date()));
   },
 
   stopPropagation(e) {
