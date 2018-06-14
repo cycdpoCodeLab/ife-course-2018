@@ -29,6 +29,7 @@ export default san.defineComponent({
       value="{= value =}"
       today="{{ today }}"
       isBoxShow="{= isBoxShow =}"
+      disabledPattern="{{ disabledPattern }}"
     >
     </selector-box>
   </div>
@@ -38,7 +39,8 @@ export default san.defineComponent({
     return {
       value: '',
       isBoxShow: false,
-      today: ''
+      today: '',
+      disabledPattern: undefined
     };
   },
 
@@ -48,7 +50,7 @@ export default san.defineComponent({
 
     // 滚动条事件
     window.addEventListener('scroll', e => {
-      if(!this.data.get('isBoxShow')) {
+      if (!this.data.get('isBoxShow')) {
         return;
       }
 
@@ -56,7 +58,8 @@ export default san.defineComponent({
     });
 
     // 赋值今天日期
-    this.data.set('today', dateToStr(new Date()));
+    let _date = new Date();
+    this.data.set('today', dateToStr(_date.getFullYear(), _date.getMonth(), _date.getDate()));
   },
 
   stopPropagation(e) {

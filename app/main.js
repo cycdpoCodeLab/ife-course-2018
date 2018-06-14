@@ -24,13 +24,15 @@ let MyApp = san.defineComponent({
     <h2>{{ title }}</h2>
     <data-picker
       value="{{ date }}"
+      disabledPattern="{{ disabledPattern }}"
     ></data-picker>
   </div>
   `,
 
   initData() {
     return {
-      date: '',
+      date: '',                          // 选择的日期，形式为'YYYY-MM-DD'
+      disabledPattern: /-01|-13|-25$/    // 禁止日期的正则，当前禁用每月1号13号25号
     };
   },
 });

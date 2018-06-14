@@ -189,6 +189,7 @@
       z-index: 10;
     }
 
+    // 视窗当月日期
     &.current-month {
       color: $fontColor;
 
@@ -197,11 +198,21 @@
       }
     }
 
+    // 今天的日期
     &.today {
       color: $colorBlue;
       font-weight: 800;
+
+      &.disabled {
+        color: lighten($colorBlue, 20%);
+
+        &:hover {
+          color: lighten($colorBlue, 20%);
+        }
+      }
     }
 
+    // 已经选中的日期
     &.current-day {
       color: white;
       font-weight: 800;
@@ -223,5 +234,14 @@
       }
     }
 
+    // 禁用日期
+    &.disabled {
+      color: lighten($fontColor, 52%);
+      cursor: not-allowed;
+
+      &:hover {
+        color: lighten($fontColor, 52%);
+      }
+    }
   }
 }
