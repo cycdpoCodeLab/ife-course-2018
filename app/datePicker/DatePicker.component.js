@@ -14,7 +14,7 @@ export default san.defineComponent({
   },
 
   template: `
-  <div class="data-picker-wrapper" on-click="stopPropagation($event)">
+  <div class="date-picker-wrapper" on-click="stopPropagation($event)">
     <div
       class="input{{ isBoxShow ? ' box-show' : ''}}"
       on-click="toggle"
@@ -30,6 +30,7 @@ export default san.defineComponent({
       today="{{ today }}"
       isBoxShow="{= isBoxShow =}"
       disabledPattern="{{ disabledPattern }}"
+      class="{{ needSelectorBoxUp ? 'upSide' : '' }}"
     >
     </selector-box>
   </div>
@@ -40,7 +41,8 @@ export default san.defineComponent({
       value: '',
       isBoxShow: false,
       today: '',
-      disabledPattern: undefined
+      disabledPattern: undefined,
+      needSelectorBoxUp: false,       // selectorBox 是否需要移到input上方
     };
   },
 
@@ -49,17 +51,38 @@ export default san.defineComponent({
     document.body.addEventListener('click', () => this.data.set('isBoxShow', false));
 
     // 滚动条事件
-    window.addEventListener('scroll', e => {
+    window.addEventListener('scroll', () => {
       if (!this.data.get('isBoxShow')) {
         return;
       }
 
-      console.log(e);
+      this.fixSelectorBoxPosition();
     });
 
     // 赋值今天日期
     let _date = new Date();
     this.data.set('today', dateToStr(_date.getFullYear(), _date.getMonth(), _date.getDate()));
+  },
+
+  /**
+   * fixSelectorBoxPosition
+   */
+  fixSelectorBoxPosition() {
+    let
+      _wrapperBottom = this.el.getBoundingClientRect().bottom
+      , windowH = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
+    ;
+
+    // selectorBox 高度           312
+    // selectorBox 距离input      16
+    // selectorBox 下面再空一点距离 12
+    // 一共                       340
+    if (windowH - _wrapperBottom < 340) {
+      this.data.set('needSelectorBoxUp', true);
+      return;
+    }
+
+    this.data.set('needSelectorBoxUp', false);
   },
 
   stopPropagation(e) {
@@ -73,7 +96,7 @@ export default san.defineComponent({
 
   trans: {
     selectorBox: {
-      enter: function (el, done) {
+      enter: (el, done) => {
         el.classList.add('before-enter');
 
         setTimeout(() => {
@@ -87,7 +110,7 @@ export default san.defineComponent({
         });
       },
 
-      leave: function (el, done) {
+      leave: (el, done) => {
         el.classList.add('before-leave');
 
         setTimeout(() => {
@@ -104,6 +127,7 @@ export default san.defineComponent({
   },
 
   toggle() {
-    this.data.set('isBoxShow', !this.data.get('isBoxShow'));
+    this.fixSelectorBoxPosition();
+    setTimeout(() => this.data.set('isBoxShow', !this.data.get('isBoxShow')), 0);
   },
 });

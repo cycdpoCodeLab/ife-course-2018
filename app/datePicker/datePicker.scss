@@ -2,7 +2,7 @@
 @import '../theme/utilities';
 @import './datePickerCommon';
 
-.data-picker-wrapper {
+.date-picker-wrapper {
   @extend %rel;
   height: $wrapperH;
   width: $wrapperW;
