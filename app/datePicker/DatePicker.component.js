@@ -19,36 +19,83 @@ export default san.defineComponent({
       class="input{{ isBoxShow ? ' box-show' : ''}}"
       on-click="toggle"
     >
-      <span class="{{ value ? '' : 'unchecked'}}">{{ value ? value : '选择日期' }}</span>
-      <span class="delete-btn" s-if="value" on-click="handleDelete($event)"></span>
+      <template s-if="type === 'date'">
+        <div class="date{{ value ? '' : ' unchecked'}}">{{ value ? value : '选择日期' }}</div>
+      </template>
+      
+      <template s-if="type === 'date-range'">
+        <div class="{{ valueRange.length !== 0 ? '' : 'unchecked'}}">{{ valueRange[0] ? valueRange[0] : '开始日期' }}</div>
+        <span>~</span>
+        <div class="{{ valueRange.length !== 0 ? '' : 'unchecked'}}">{{ valueRange[1] ? valueRange[1] : '结束日期' }}</div>
+      </template>
+      
+      <span
+        class="delete-btn"
+        s-if="value || valueRange.length"
+        on-click="handleDelete($event)"></span>
     </div>
     
-    <selector-box
-      s-if="isBoxShow"
-      s-transition="trans.selectorBox"
-      value="{= value =}"
-      today="{{ today }}"
-      isBoxShow="{= isBoxShow =}"
-      disabledPattern="{{ disabledPattern }}"
-      class="{{ needSelectorBoxUp ? 'upSide' : '' }}"
+    <div 
+    class="selector-box-wrapper{{ needSelectorBoxUp ? ' upSide' : '' }}"
+    s-if="isBoxShow"
+    s-transition="trans.selectorBox"
     >
-    </selector-box>
+      <template s-if="type === 'date'">
+        <selector-box
+          type="{{ type }}"
+          value="{= value =}"
+          today="{{ today }}"
+          isBoxShow="{= isBoxShow =}"
+          disabledPattern="{{ disabledPattern }}"
+        ></selector-box>
+      </template>
+      
+      <template s-if="type === 'date-range'">
+        <selector-box
+          type="{{ type }}"
+          valueRange="{= valueRange =}"
+          tempRange="{= tempRange =}"
+          today="{{ today }}"
+          isBoxShow="{= isBoxShow =}"
+          disabledPattern="{{ disabledPattern }}"
+          updatePointer="{= updatePointer =}"
+        ></selector-box>
+        
+        <div class="date-range-line"></div>
+        
+        <selector-box
+          type="{{ type }}"
+          valueRange="{= valueRange =}"
+          tempRange="{= tempRange =}"
+          today="{{ today }}"
+          isBoxShow="{= isBoxShow =}"
+          disabledPattern="{{ disabledPattern }}"
+          isSecondBox
+          updatePointer="{= updatePointer =}"
+        ></selector-box>
+      </template>
+    </div>
+    
   </div>
   `,
 
   initData() {
     return {
+      type: 'date',
       value: '',
+      valueRange: [],
+      tempRange: [],
       isBoxShow: false,
       today: '',
       disabledPattern: undefined,
       needSelectorBoxUp: false,       // selectorBox 是否需要移到input上方
+      updatePointer: 0,
     };
   },
 
   attached() {
     // 模拟blur
-    document.body.addEventListener('click', () => this.data.set('isBoxShow', false));
+    document.body.addEventListener('click', () => this.data.set('isBoxShow', false), this.clearTempRange());
 
     // 滚动条事件
     window.addEventListener('scroll', () => {
@@ -91,7 +138,14 @@ export default san.defineComponent({
 
   handleDelete(e) {
     e.stopPropagation();
-    this.data.set('value', '');
+
+    if (this.data.get('type') === 'date') {
+      this.data.set('value', '');
+      return;
+    }
+
+    this.data.set('valueRange', []);
+    this.data.set('updatePointer', this.data.get('updatePointer') + 1);
   },
 
   trans: {
@@ -128,6 +182,14 @@ export default san.defineComponent({
 
   toggle() {
     this.fixSelectorBoxPosition();
+    this.clearTempRange();
+
     setTimeout(() => this.data.set('isBoxShow', !this.data.get('isBoxShow')), 0);
+  },
+
+  clearTempRange() {
+    if (this.data.get('type') === 'date-range') {
+      this.data.set('tempRange', []);
+    }
   },
 });

@@ -3,60 +3,7 @@
 @import './datePickerCommon';
 
 .selector-box {
-  @extend %abs;
-  top: $wrapperH + 16px;
-  left: 0;
   width: $selectorW;
-
-  background: $bgc;
-  filter: drop-shadow(0 0 2px rgba(black, .2));
-
-  transform-origin: 50% 0;
-
-  &::before {
-    content: '';
-    display: block;
-    @extend %abs;
-    left: 20px;
-    top: -6px;
-
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 6px solid $bgc;
-  }
-
-  // selector-box 在 input 上面的样式
-  &.upSide {
-    top: - 50px - $cellW - $cellH * 6 - 30px - 16px;
-    transform-origin: 50% 100%;
-
-    &::before {
-      top: auto;
-      bottom: -6px;
-
-      width: 0;
-      height: 0;
-      border-top: 6px solid $bgc;
-      border-bottom: none;
-    }
-  }
-}
-
-// selectorBox transition style
-.enter, .leave {
-  transition: all .3s;
-}
-
-.before-enter, .leave {
-  opacity: 0;
-  transform: scaleY(0);
-}
-
-.enter, .before-leave {
-  opacity: 1;
-  transform: scaleY(1);
 }
 
 /**
@@ -186,7 +133,7 @@
 
     span {
       @extend %rel;
-      z-index: 10;
+      z-index: 20;
     }
 
     // 视窗当月日期
@@ -213,7 +160,7 @@
     }
 
     // 已经选中的日期
-    &.current-day {
+    &.selected {
       color: white;
       font-weight: 800;
 
@@ -221,13 +168,13 @@
         color: white;
       }
 
-      &::before {
+      &::after {
         content: '';
         display: block;
         @include fix-center(0);
 
-        width: 30px;
-        height: 30px;
+        width: 24px;
+        height: 24px;
 
         background-color: $colorBlue;
         border-radius: 50%;
@@ -241,6 +188,42 @@
 
       &:hover {
         color: lighten($fontColor, 52%);
+      }
+    }
+
+    // 范围中的日期
+    &.inRange {
+      &::before {
+        content: '';
+        display: block;
+        @include fix-center(0);
+
+        width: 100%;
+        height: 28px;
+
+        background-color: lighten($colorBlue, 32%);
+      }
+    }
+
+    // 范围中第一个日期
+    &.first {
+      &::before {
+        left: auto;
+        width: 40px - (40px - 28px) /2;
+
+        border-bottom-left-radius: 14px;
+        border-top-left-radius: 14px;
+      }
+    }
+
+    // 范围中最后一个日期
+    &.last {
+      &::before {
+        right: auto;
+        width: 40px - (40px - 28px) /2;
+
+        border-bottom-right-radius: 14px;
+        border-top-right-radius: 14px;
       }
     }
   }

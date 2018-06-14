@@ -22,9 +22,18 @@ let MyApp = san.defineComponent({
   <div class="root">
     <p>{{ explain }}</p>
     <h2>{{ title }}</h2>
+    
+    <h3>日期选择(type="date")</h3>
     <data-picker
+      type="date"
       value="{{ date }}"
       disabledPattern="{{ disabledPattern }}"
+    ></data-picker>
+    
+    <h3>日期范围选择(type="date-range")</h3>
+    <data-picker
+      type="date-range"
+      valueRange="{{ valueRange }}"
     ></data-picker>
   </div>
   `,
@@ -32,7 +41,8 @@ let MyApp = san.defineComponent({
   initData() {
     return {
       date: '',                          // 选择的日期，形式为'YYYY-MM-DD'
-      disabledPattern: /-01|-13|-25$/    // 禁止日期的正则，当前禁用每月1号13号25号
+      disabledPattern: /01$|13$|25$/,    // 禁止日期的正则，当前禁用每月1号13号25号
+      valueRange: [],
     };
   },
 });
