@@ -59,6 +59,7 @@ export default san.defineComponent({
           isBoxShow="{= isBoxShow =}"
           disabledPattern="{{ disabledPattern }}"
           updatePointer="{= updatePointer =}"
+          rangeSelected1="{= rangeSelected1 =}"
         ></selector-box>
         
         <div class="date-range-line"></div>
@@ -72,6 +73,7 @@ export default san.defineComponent({
           disabledPattern="{{ disabledPattern }}"
           isSecondBox
           updatePointer="{= updatePointer =}"
+          rangeSelected1="{= rangeSelected1 =}"
         ></selector-box>
       </template>
     </div>
@@ -90,6 +92,7 @@ export default san.defineComponent({
       disabledPattern: undefined,
       needSelectorBoxUp: false,       // selectorBox 是否需要移到input上方
       updatePointer: 0,
+      rangeSelected1: '',
     };
   },
 

@@ -33,9 +33,9 @@ export default san.defineComponent({
     <ul class="date-list-wrapper">
       <li 
         s-for="dateItem in dateList" 
-        class="
-        {{ dateItem.month === month ? 'current-month' : ''}}{{ dateItem.value === today ? ' today' : '' }}{{ dateItem.selected ? ' selected' : '' }}{{ dateItem.disabled ? ' disabled' : '' }}{{ dateItem.inRange ? ' inRange' : '' }}{{ dateItem.value === valueRange[0] ? ' first' : '' }}{{ dateItem.value === valueRange[1] ? ' last' : '' }}"
+        class="{{ dateItem.month === month ? 'current-month' : ''}}{{ dateItem.value === today ? ' today' : '' }}{{ dateItem.selected ? ' selected' : '' }}{{ dateItem.disabled ? ' disabled' : '' }}{{ dateItem.inRange ? ' inRange' : '' }}{{ dateItem.value === valueRange[0] || dateItem.value === tempRange[0] ? ' first' : '' }}{{ dateItem.value === valueRange[1] || dateItem.value === tempRange[1] ? ' last' : '' }}"
         on-click="handleDateClick(dateItem)"
+        on-mouseenter="handleDateMouseEnter(dateItem)"
       >
         <span>{{ dateItem.date }}</span>
       </li>
@@ -57,6 +57,7 @@ export default san.defineComponent({
 
       valueRange: [],      // 最终输出值
       tempRange: [],       // 临时存储
+      rangeSelected1: '',  // 选中的第一个值
       isSecondBox: false,  // 是否为第二个选择器
 
       updatePointer: 0     // 更新指针，用来同步两个选择框状态
@@ -128,20 +129,51 @@ export default san.defineComponent({
 
     // 日期范围选择
     let tempRange = this.data.get('tempRange');
-    tempRange.push(dateObj.value);
 
-    if (tempRange.length === 1) {
+    if (tempRange.length === 0) {
+      tempRange.push(dateObj.value);
       this.data.set('valueRange', []);
+      this.data.set('rangeSelected1', dateObj.value);
       this.data.set('tempRange', tempRange);
       this.data.set('updatePointer', this.data.get('updatePointer') + 1);
-      return
+      return;
     }
 
-    tempRange.sort();
+    if (tempRange.length === 1) {
+      tempRange.push(dateObj.value);
+      tempRange.sort();
+    }
+
     this.data.set('valueRange', [...tempRange]);
     this.data.set('tempRange', []);
+    this.data.set('rangeSelected1', '');
     this.data.set('updatePointer', this.data.get('updatePointer') + 1);
     this.data.set('isBoxShow', false);
+  },
+
+  /**
+   * handleDateMouseEnter
+   * @param dateObj
+   */
+  handleDateMouseEnter(dateObj) {
+    if (dateObj.disabled) {
+      return;
+    }
+
+    // 日期选择器不需要
+    if (this.data.get('type') === 'date') {
+      return;
+    }
+
+    // 未选择第一个
+    if (this.data.get('tempRange').length === 0) {
+      return;
+    }
+
+    let _tempRange = [this.data.get('rangeSelected1'), dateObj.value];
+    _tempRange.sort();
+    this.data.set('tempRange', _tempRange);
+    this.data.set('updatePointer', this.data.get('updatePointer') + 1);
   },
 
   /**
@@ -192,6 +224,7 @@ export default san.defineComponent({
       ;
 
       // 日期范围选择器
+      // 判断是否selected
       if (
         _valueRange.indexOf(_dateObj.value) !== -1 ||
         _tempRange.indexOf(_dateObj.value) !== -1
@@ -199,14 +232,17 @@ export default san.defineComponent({
         _dateObj.selected = true;
       }
 
-      if (_valueRange.length) {
-        if (
-          new Date(_dateObj.value) >= new Date(_valueRange[0]) &&
-          new Date(_dateObj.value) <= new Date(_valueRange[1])
-        ) {
-          _dateObj.inRange = true;
+      // 判断是否inRange
+      [_valueRange, _tempRange].forEach(aRange => {
+        if (aRange.length) {
+          if (
+            new Date(_dateObj.value) >= new Date(aRange[0]) &&
+            new Date(_dateObj.value) <= new Date(aRange[1])
+          ) {
+            _dateObj.inRange = true;
+          }
         }
-      }
+      });
 
       _dateList.push(_dateObj);
       dFirstDateInView.setDate(dFirstDateInView.getDate() + 1); // 指针移动到下一天
