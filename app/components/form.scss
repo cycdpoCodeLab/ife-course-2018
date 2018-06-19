@@ -1,0 +1,8 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

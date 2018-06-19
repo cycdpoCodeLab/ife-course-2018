@@ -1,0 +1,21 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+.form-item-wrapper {
+  display: flex;
+  width: 100%;
+  margin: $itemSpace 0;
+  line-height: $itemH;
+
+  > label {
+    display: block;
+    margin-right: 10px;
+    height: 40px;
+  }
+
+  > div {
+    flex: 1;
+  }
+}
+
+

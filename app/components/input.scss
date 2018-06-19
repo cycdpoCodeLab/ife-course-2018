@@ -1,0 +1,27 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+.input-wrapper {
+  @extend %rel;
+  border: 1px solid $fontColor;
+  height: $itemH - 2px;
+
+  > input {
+    display: block;
+    @extend %fullContainer;
+    padding: 0 10px;
+
+    box-sizing: border-box;
+    background: none;
+    outline: none;
+    border: none;
+  }
+}
+
+.error-text {
+  @extend %abs;
+  left: 0;
+  top: $itemH;
+  color: $colorRed;
+  line-height: 20px;
+}

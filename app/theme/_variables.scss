@@ -1,9 +1,9 @@
 /*---------------------------
  * font-size
  *---------------------------*/
-$fontS: 14px;
-$fontM: 15.5px;
-$fontL: 17px;
+$fontS: 12px;
+$fontM: 14px;
+$fontL: 16px;
 
 /*---------------------------
  * color
@@ -15,4 +15,12 @@ $fontColor: #666;
 $bgc: white;
 
 /* other color */
+$colorRed: #f56c6c;
+
+/*---------------------------
+ * layout
+ *---------------------------*/
+$itemH: 40px;
+$itemSpace: 20px;
+$radius: 4px;
 
