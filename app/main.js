@@ -30,7 +30,7 @@ let MyApp = san.defineComponent({
   <div class="root">
     <ui-form
       formModel="{= formModel =}"
-      s-ref="form">
+      s-ref="formModel">
       
       <ui-form-item
         rules="{{ ruleMobile }}"
@@ -41,7 +41,7 @@ let MyApp = san.defineComponent({
       </ui-form-item>
       
       <ui-form-item
-        rules="{{ruleAddress}}"
+        rules="{{ ruleAddress }}"
         prop="address"
         helpText="请输入地址"
         label="地址">
@@ -65,8 +65,8 @@ let MyApp = san.defineComponent({
       </ui-form-item>
       
       <ui-form-item>
-        <ui-button on-click="submitForm">提交</ui-button>
-        <ui-button on-click="resetForm">重置</ui-button>
+        <ui-button on-click="submitForm('formModel')">提交</ui-button>
+        <ui-button on-click="resetForm('formModel')">重置</ui-button>
       </ui-form-item>
     
     </ui-form>
@@ -82,15 +82,18 @@ let MyApp = san.defineComponent({
           userName,
           idCard: value
         });
+
         // 将用户名和身份证号码作为参数发送异步请求，到服务端验证
-        setTimeout(function () {
-          callback([new Error('您输入的身份信息不匹配')]);
+        setTimeout(() => {
+          if (Math.random() > 0.5) {
+            callback([new Error('您输入的身份信息不匹配')]);
+          } else {
+            callback([]);
+          }
         }, 1000);
       }
       else {
-        setTimeout(function () {
-          callback(['请输入身份证号码']);
-        }, 1000);
+        setTimeout(() => callback(['请输入身份证号码']), 1000);
       }
     };
 
@@ -150,12 +153,29 @@ let MyApp = san.defineComponent({
     };
   },
 
-  submitForm() {
-    console.log('submitForm');
+  submitForm(formName) {
+    let _formModel = this.data.get(formName);
+
+    // todo
+    console.log(_formModel);
+
+    // this.data.set('formStatus', 'validating');
+
+    // this.ref(formName).validate(valid => {
+    //   this.data.set('formStatus', 'validateEnd');
+    //   if (valid) {
+    //     // 验证成功 do someThing
+    //     alert('验证成功');
+    //   } else {
+    //     // 验证失败 do someThing
+    //     console.log('验证失败');
+    //   }
+    // });
   },
 
-  resetForm() {
-    console.log('resetForm');
+  resetForm(formName) {
+    this.data.set('formStatus', '');
+    this.ref(formName).resetFields();
   },
 });
 

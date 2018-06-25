@@ -3,4 +3,16 @@
 
 .button {
   @extend %flexCenter;
+  padding: 10px;
+
+  background-color: $colorBlue;
+  color: white;
+
+  &:hover {
+    background-color: lighten($colorBlue, 5%);
+  }
+
+  + .button {
+    margin-left: 20px;
+  }
 }

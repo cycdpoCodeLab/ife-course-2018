@@ -3,15 +3,17 @@ import san from 'san';
 import './button.scss';
 
 export default san.defineComponent({
-
-
   template: `
-  <button class="button">
+  <button 
+    type="button" 
+    class="button"
+    on-click="handleClick">
     <slot></slot>
   </button>
   `,
 
-  initData() {
-    return {};
+  handleClick() {
+    this.fire('click');
   },
 });
+
