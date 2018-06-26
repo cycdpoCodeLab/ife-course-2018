@@ -1,0 +1,38 @@
+@import '../../theme/variables';
+@import '../../theme/utilities';
+
+.form-item-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: $itemSpace 0;
+  line-height: $itemH;
+
+  > label {
+    display: block;
+    padding-right: 10px;
+    height: 40px;
+    box-sizing: border-box;
+
+    &::before {
+      display: inline-block;
+      content: "*";
+
+      color: $colorRed;
+      padding: 0 5px;
+      opacity: 0;
+    }
+
+    &.require {
+      &::before {
+        opacity: 1;
+      }
+    }
+  }
+
+  > div {
+    flex: 1;
+  }
+}
+
+

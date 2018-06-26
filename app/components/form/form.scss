@@ -1,0 +1,30 @@
+@import '../../theme/variables';
+@import '../../theme/utilities';
+
+.form-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  &.left {
+    label {
+      text-align: left;
+    }
+  }
+
+  &.right {
+    label {
+      text-align: right;
+    }
+  }
+
+  &.top {
+    label {
+      width: 100%;
+    }
+
+    label + .input-wrapper {
+      flex-basis: 100%;
+    }
+  }
+}

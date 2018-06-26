@@ -11,6 +11,7 @@ export default san.defineComponent({
       autocomplete="off"
       placeholder="{{ helpText }}"
       value="{= value =}"
+      on-blur="handleBlur"
     />
     
     <div

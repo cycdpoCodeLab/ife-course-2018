@@ -9,6 +9,7 @@ export default san.defineComponent({
     style="{{ label === '' && labelPosition !== 'top' ? 'margin-left: ' + labelWidth + ';' : '' }}">
     <label
       s-if="label"
+      class="{{ require ? 'require' : '' }}"
       style="{{ labelWidth ? 'width: ' + labelWidth + ';' : ''}}"
     >{{ label }}</label>
     
@@ -23,6 +24,7 @@ export default san.defineComponent({
       helpText: '',
       require: false,
       label: '',
+
       labelWidth: '',
       labelPosition: '',
     };
@@ -32,6 +34,42 @@ export default san.defineComponent({
     // 保证prop不为空
     if (!this.data.get('prop')) {
       this.data.set('prop', this.id);
+    }
+
+    // 赋值require
+    let
+      _rules = this.data.get('rules')
+      , _isRequire = this.data.get('require')
+      , _hasRequiredInRule = false      // rule中是否存在'required'属性
+    ;
+
+    for (let i = 0, len = _rules.length; i < len; i++) {
+      if (_hasRequiredInRule) {
+        break;
+      }
+
+      for (let oRuleKey in _rules[i]) {
+        if (!_rules[i].hasOwnProperty(oRuleKey)) {
+          continue;
+        }
+
+        if (oRuleKey === 'required') {
+          _hasRequiredInRule = true;
+          // 把rule中的required值赋给data的require
+          this.data.set('require', _rules[i][oRuleKey]);
+          break;
+        }
+      }
+    }
+
+    // data中require为真但rule中没有required规则
+    // 添加一条规则
+    if (!_hasRequiredInRule && _isRequire) {
+      _rules.unshift({
+        required: _isRequire,
+      });
+
+      this.data.set('rules', _rules);
     }
 
     // 传给form组件

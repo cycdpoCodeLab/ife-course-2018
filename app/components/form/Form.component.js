@@ -8,8 +8,8 @@ export default san.defineComponent({
   components: {},
 
   template: `
-  <form class="form-wrapper">
-    <slot var-labelWidth="labelWidth" var-labelPosition="labelPosition"></slot>
+  <form class="form-wrapper {{ labelPosition }}">
+    <slot></slot>
   </form>
   `,
 
@@ -32,8 +32,6 @@ export default san.defineComponent({
   messages: {
     'form-item-inited'(arg) {
       let _formItemComponent = arg.target;
-
-      // 赋值input组件验证方法和重置方法
       _formItemComponent.data.set('labelWidth', this.data.get('labelWidth'));
       _formItemComponent.data.set('labelPosition', this.data.get('labelPosition'));
     },
@@ -52,7 +50,7 @@ export default san.defineComponent({
     },
   },
 
-  validateField(field) {
+  validateField(field, callback) {
     if (!this.data.get('formModel').hasOwnProperty(field)) {
       throw new Error('can\'t find field: ' + field);
     }
@@ -69,11 +67,40 @@ export default san.defineComponent({
       [field]: _value
     }, errors => {
       this.data.get('errorFuncs.' + field)(errors);
+
+      if (callback) {
+        callback(errors);
+      }
     });
   },
 
   validate(callback) {
-    // todo
+    let
+      _rules = this.data.get('rules')
+      , _formModel = this.data.get('formModel')
+      , _errorFuncs = this.data.get('errorFuncs')
+      , _validator = new Schema(_rules)
+    ;
+
+    _validator.validate(_formModel, (errors, fields) => {
+
+      if (callback) {
+        callback(!errors);
+      }
+
+      for (let field in _rules) {
+        if (!_rules.hasOwnProperty(field)) {
+          continue;
+        }
+
+        if (fields && fields.hasOwnProperty(field)) {
+          _errorFuncs[field](fields[field]);
+          continue;
+        }
+
+        _errorFuncs[field]();
+      }
+    });
   },
 
   resetFields() {
