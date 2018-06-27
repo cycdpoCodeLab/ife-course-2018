@@ -26,14 +26,14 @@ let MyApp = san.defineComponent({
     <h3>日期选择(type="date")</h3>
     <data-picker
       type="date"
-      value="{{ date }}"
+      value="{= date =}"
       disabledPattern="{{ disabledPattern }}"
     ></data-picker>
     
     <h3>日期范围选择(type="date-range")</h3>
     <data-picker
       type="date-range"
-      valueRange="{{ valueRange }}"
+      valueRange="{= valueRange =}"
     ></data-picker>
   </div>
   `,
