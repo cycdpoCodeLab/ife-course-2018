@@ -91,6 +91,18 @@ export default san.defineComponent({
       });
     },
 
+    'date-picker-inited'(arg) {
+      let datePickerComponent = arg.target;
+
+      // 传给form组件
+      this.dispatch('date-picker-inited', {
+        prop: this.data.get('prop'),
+        rules: this.data.get('rules'),
+        error: datePickerComponent.error.bind(datePickerComponent),
+        reset: datePickerComponent.reset.bind(datePickerComponent),
+      });
+    },
+
     'input-validate'() {
       // 传给form组件
       this.dispatch('input-validate', {

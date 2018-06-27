@@ -26,7 +26,6 @@ export default san.defineComponent({
   },
 
   inited() {
-    console.log(this.data.get('formModel'));
   },
 
   messages: {
@@ -37,6 +36,15 @@ export default san.defineComponent({
     },
 
     'input-inited'(arg) {
+      let _value = arg.value;
+
+      // 赋值input组件错误显示方法和重置方法
+      this.data.set('rules.' + _value.prop, _value.rules);
+      this.data.set('errorFuncs.' + _value.prop, _value.error);
+      this.data.set('resetFuncs.' + _value.prop, _value.reset);
+    },
+
+    'date-picker-inited'(arg) {
       let _value = arg.value;
 
       // 赋值input组件错误显示方法和重置方法

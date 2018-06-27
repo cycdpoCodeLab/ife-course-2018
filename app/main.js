@@ -16,6 +16,7 @@ import Form from './components/form/Form.component';
 import FormItem from './components/form-item/FormItem.component';
 import Input from './components/input/Input.component';
 import Button from './components/button/Button.component';
+import DatePicker from './components/date-picker/DatePicker.component'
 
 // 定义Component
 let MyApp = san.defineComponent({
@@ -23,7 +24,8 @@ let MyApp = san.defineComponent({
     'ui-button': Button,
     'ui-form': Form,
     'ui-form-item': FormItem,
-    'ui-input': Input
+    'ui-input': Input,
+    'date-picker': DatePicker,
   },
 
   template: `
@@ -73,6 +75,24 @@ let MyApp = san.defineComponent({
           value="{= formModel.idCard =}"
         ></ui-input>
       </ui-form-item>
+            
+      <ui-form-item
+        prop="birthday"
+        label="生日">
+        <date-picker
+          type="date"
+          value="{= formModel.birthday =}"
+        ></date-picker>
+      </ui-form-item>
+      
+      <ui-form-item
+        prop="leaveRange"
+        label="请假时间">
+        <date-picker
+          type="date-range"
+          valueRange="{= formModel.leaveRange =}"
+        ></date-picker>
+      </ui-form-item>
       
       <ui-form-item>
         <ui-button on-click="submitForm('formModel')">提交</ui-button>
@@ -114,7 +134,9 @@ let MyApp = san.defineComponent({
         mobile: '',
         userName: '',
         idCard: '',
-        address: ''
+        address: '',
+        birthday: '',
+        leaveRange: []
       },
       formStatus: '',
       ruleMobile: [
@@ -176,6 +198,7 @@ let MyApp = san.defineComponent({
       } else {
         this.data.set('formStatus', 'validateEnd: fail');
       }
+      console.log(this.data.get(formName));
     });
   },
 
