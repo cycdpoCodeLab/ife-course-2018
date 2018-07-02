@@ -1,0 +1,28 @@
+@import '../../theme/variables';
+@import '../../theme/utilities';
+
+.footer {
+  @extend %rel;
+  padding: 10px 15px;
+  height: 20px;
+  text-align: center;
+  border-top: 1px solid $bgc;
+  display: flex;
+
+  &::before {
+    content: '';
+    @extend %abs;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: 40px;
+
+    overflow: hidden;
+    box-shadow: 0 1px 1px rgba(black, .2),
+    0 8px 0 -3px #f6f6f6,
+    0 9px 1px -3px rgba(black, .2),
+    0 16px 0 -6px #f6f6f6,
+    0 17px 2px -6px rgba(black, .2);
+  }
+}
+

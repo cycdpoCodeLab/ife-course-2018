@@ -35,7 +35,7 @@ export default san.defineComponent({
     }
 
     console.log('增加一条记录: ', _value);
-    this.data.set('value', '');
+    this.dispatch('new-todo-item');
   },
 });
 

@@ -1,0 +1,109 @@
+@import '../../theme/variables';
+@import '../../theme/utilities';
+
+.list-item {
+  position: relative;
+  font-size: 24px;
+  border-bottom: 1px solid #ededed;
+  height: 64px;
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  // completed
+  &.completed {
+    .list-item__edit {
+      color: #d9d9d9;
+      text-decoration: line-through;
+    }
+
+    .list-item__check::before {
+      background: url("../../../static/images/icon-checked.svg") no-repeat;
+      background-size: 100% 100%;
+    }
+  }
+
+  // editing
+  &.editing {
+    .list-item__edit {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .list-item__mask {
+      display: none;
+    }
+  }
+
+  &:hover {
+    .list-item__del {
+      display: block;
+    }
+  }
+}
+
+.list-item__edit {
+  @extend %rel;
+  width: 100%;
+  margin: 0;
+  height: 100%;
+  padding-left: 60px;
+  padding-right: 60px;
+  box-sizing: border-box;
+
+  font-size: 24px;
+  color: inherit;
+}
+
+.list-item__mask {
+  @extend %fullContainer;
+}
+
+.list-item__del {
+  @extend %abs;
+  @extend %flexCenter;
+  display: none;
+  top: 0;
+  right: 0;
+  width: 40px;
+  height: 100%;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 16px;
+    width: 16px;
+
+    background: url("../../../static/images/icon-close.svg") no-repeat;
+    background-size: 100% 100%;
+
+    opacity: .6;
+    transition: opacity .5s;
+  }
+
+  &:hover {
+    &::before {
+      opacity: .9;
+    }
+  }
+}
+
+.list-item__check {
+  @extend %abs;
+  @extend %flexCenter;
+  top: 0;
+  left: 0;
+  width: 60px;
+  height: 100%;
+
+  &::before {
+    content: "";
+    display: block;
+    height: 40px;
+    width: 40px;
+
+    background: url("../../../static/images/icon-unchecked.svg") no-repeat;
+    background-size: 100% 100%;
+  }
+}
