@@ -6,32 +6,28 @@ import myStorage from './localstorage.funcs';
 
 import NewTodo from './NewTodo.component';
 import TodoFooter from './TodoFooter.component';
-import TodoListItem from './TodoListItem.component';
+import TodoList from './TodoList.component';
 
 export default san.defineComponent({
   components: {
     'new-todo': NewTodo,
     'todo-footer': TodoFooter,
-    'todo-list-item': TodoListItem,
+    'todo-list': TodoList,
   },
 
   template: `
-  <section class="todoapp">
+  <section class="todo-app">
     <new-todo value="{= newTodo =}" />
     
-    <section 
-      class="main"
-      style="{{ isEmpty ? 'display: none;' : ''}}">
-      <ul class="todo-list">
-        <todo-list-item 
-        s-for="item in todoList" 
-        item="{= item =}"/>
-      </ul>
-    </section>
+    <todo-list 
+      style="{{ isEmpty ? 'display: none;' : ''}}"
+      showList="{{ showList }}"
+      isAllChecked="{{ isAllChecked }}"/>
     
     <todo-footer 
       style="{{ isEmpty ? 'display: none;' : ''}}"
       todoList="{{ todoList }}"
+      type="{= type =}"
     />
   </section>
   `,
@@ -40,8 +36,11 @@ export default san.defineComponent({
     return {
       newTodo: '',
       todoList: [],
+      showList: [],
       lastOrder: 0,
       isEmpty: true,
+      type: 'all',
+      isAllChecked: false,
     };
   },
 
@@ -58,6 +57,32 @@ export default san.defineComponent({
     this.data.set('todoList', _todoList);
     this.data.set('lastOrder', _todoList[_todoListLength - 1].order);
     this.data.set('isEmpty', false);
+  },
+
+  computed: {
+    showList() {
+      let
+        _todoList = this.data.get('todoList')
+        , _type = this.data.get('type')
+      ;
+
+      console.log('showList computed');
+
+      switch (_type) {
+        case 'active':
+          return _todoList.filter(item => !item.completed);
+
+        case 'completed':
+          return _todoList.filter(item => item.completed);
+
+        default:
+          return _todoList;
+      }
+    },
+
+    isAllChecked() {
+      return this.data.get('todoList').filter(item => !item.completed).length === 0
+    }
   },
 
   messages: {
@@ -81,8 +106,52 @@ export default san.defineComponent({
     },
 
     'update-todo-item'(arg) {
-      // data双向绑定，只需要更新storage
-      myStorage.updateStorage(arg.value);
+      let
+        _item = arg.value
+        , _index = this.data.get('todoList')
+          .map(item => item.id)
+          .indexOf(_item.id)
+      ;
+
+      this.nextTick(() => {
+        this.data.splice('todoList', [_index, 1, _item]);
+        myStorage.updateStorage(_item);  // 同时更新到storage
+      });
+
+    },
+
+    // todo fix bug
+    'toggle-all-todo'() {
+      let
+        _isAllChecked = this.data.get('isAllChecked')
+        , _newTodoList = this.data.get('todoList')
+          .map(item => {
+            item.completed = !_isAllChecked;
+            myStorage.updateStorage(item);  // 同时更新到storage
+            return item;
+          })
+      ;
+
+      this.data.set('todoList', _newTodoList);
+    },
+
+    'clear-completed-todo'() {
+      let
+        _todoList = this.data.get('todoList')
+        , _newTodoList = []
+        , _deletedTodoList = []
+      ;
+
+      _todoList.forEach(item => {
+        if (item.completed) {
+          _deletedTodoList.push(item);
+        } else {
+          _newTodoList.push(item);
+        }
+      });
+
+      this.data.set('todoList', _newTodoList);
+      _deletedTodoList.forEach(item => myStorage.removeStorage(item.id));  // 同时更新到storage
     },
 
     'remove-todo-item'(arg) {
@@ -94,7 +163,6 @@ export default san.defineComponent({
 
       this.data.remove('todoList', _item);
       myStorage.removeStorage(_itemId);
-
       this._checkEmpty();
     },
   },
@@ -107,6 +175,5 @@ export default san.defineComponent({
       this.data.set('lastOrder', 0);
     }
   },
-
 });
 

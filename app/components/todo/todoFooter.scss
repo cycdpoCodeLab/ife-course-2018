@@ -3,11 +3,10 @@
 
 .footer {
   @extend %rel;
-  padding: 10px 15px;
-  height: 20px;
+  @extend %flexCenter;
+  height: 40px;
   text-align: center;
   border-top: 1px solid $bgc;
-  display: flex;
 
   &::before {
     content: '';
@@ -26,3 +25,39 @@
   }
 }
 
+.items-count {
+  @extend %abs;
+  @extend %flexCenter;
+  top: 0;
+  left: 20px;
+  bottom: 0;
+  margin: auto;
+}
+
+.filters-wrapper {
+  @extend %rel;
+
+  > a {
+    margin: 3px;
+    padding: 3px 7px;
+    border: 1px solid transparent;
+    border-radius: 3px;
+
+    &.selected {
+      border-color: rgba(175, 47, 47, .2);
+    }
+  }
+}
+
+.clear-completed {
+  @extend %abs;
+  @extend %flexCenter;
+  top: 0;
+  right: 20px;
+  bottom: 0;
+  margin: auto;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

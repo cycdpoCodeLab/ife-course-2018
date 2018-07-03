@@ -1,10 +1,12 @@
 import san from 'san';
 
+import './newTodo.scss';
+
 export default san.defineComponent({
   components: {},
 
   template: `
-  <header class="header">
+  <header>
     <input 
       class="new-todo" 
       placeholder="What needs to be done?"
