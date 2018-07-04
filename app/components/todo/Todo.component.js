@@ -2,8 +2,13 @@ import san from 'san';
 
 import './todo.scss';
 
+// service
 import myStorage from './localstorage.funcs';
+import {
+  router
+} from 'san-router';
 
+// component
 import NewTodo from './NewTodo.component';
 import TodoFooter from './TodoFooter.component';
 import TodoList from './TodoList.component';
@@ -27,36 +32,48 @@ export default san.defineComponent({
     <todo-footer 
       style="{{ isEmpty ? 'display: none;' : ''}}"
       todoList="{{ todoList }}"
-      type="{= type =}"
+      type="{{ type }}"
     />
   </section>
   `,
 
   initData() {
-    return {
-      newTodo: '',
-      todoList: [],
-      showList: [],
-      lastOrder: 0,
-      isEmpty: true,
-      type: 'all',
-      isAllChecked: false,
-    };
-  },
-
-  inited() {
     let
-      _todoList = myStorage.initStorage()
+      _data = {
+        newTodo: '',
+        todoList: [],
+        showList: [],
+        lastOrder: 0,
+        isEmpty: true,
+        type: 'all',
+        isAllChecked: false,
+      }
+      , _todoList = myStorage.initStorage()
       , _todoListLength = _todoList.length
     ;
 
     if (!_todoListLength) {
-      return;
+      return _data;
     }
 
-    this.data.set('todoList', _todoList);
-    this.data.set('lastOrder', _todoList[_todoListLength - 1].order);
-    this.data.set('isEmpty', false);
+    _data.todoList = _todoList;
+    _data.lastOrder = _todoList[_todoListLength - 1].order;
+    _data.isEmpty = false;
+
+    return _data;
+  },
+
+  inited() {
+    router.add({
+      rule: '/:type',
+      handler: e => {
+        let _type = e.query.type;
+        if (_type) {
+          this.data.set('type', _type);
+        }
+      },
+    });
+    router.start();
   },
 
   computed: {

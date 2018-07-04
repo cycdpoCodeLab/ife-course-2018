@@ -2,8 +2,14 @@ import san from 'san';
 
 import './todoFooter.scss';
 
+import {
+  Link
+} from 'san-router';
+
 export default san.defineComponent({
-  components: {},
+  components: {
+    'router-link': Link
+  },
 
   template: `
     <footer class="footer">
@@ -13,15 +19,18 @@ export default san.defineComponent({
         on-click="clearCompleted">Clear completed</button>
       
       <div class="filters-wrapper">
-        <a href="javascript:;"
+        <router-link
+          to="/all"
           class="{{ type === 'all' ? 'selected' : ''}}"
-          on-click="typeChange('all')">All</a>
-        <a href="javascript:;"
+        >All</router-link>
+        <router-link
+          to="/active"
           class="{{ type === 'active' ? 'selected' : ''}}"
-          on-click="typeChange('active')">Active</a>
-        <a href="javascript:;"
+        >Active</router-link>
+        <router-link
+          to="/completed"
           class="{{ type === 'completed' ? 'selected' : ''}}"
-          on-click="typeChange('completed')">Completed</a>
+        >Completed</router-link>
       </div>
     </footer>
   `,
@@ -51,10 +60,6 @@ export default san.defineComponent({
     completedCount() {
       return this.data.get('todoList').filter(item => item.completed).length;
     }
-  },
-
-  typeChange(type) {
-    this.data.set('type', type);
   },
 
   clearCompleted() {

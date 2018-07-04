@@ -23,7 +23,8 @@
   "homepage": "https://github.com/cycjimmy/ife-course-2018#readme",
   "dependencies": {
     "animate.css": "^3.6.1",
-    "san": "^3.5.11"
+    "san": "^3.5.11",
+    "san-router": "^1.2.0"
   },
   "devDependencies": {
     "autoprefixer": "^8.4.1",
