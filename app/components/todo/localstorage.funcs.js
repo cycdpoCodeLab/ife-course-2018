@@ -62,9 +62,6 @@ let removeStorage = key => {
 };
 
 export default {
-  _getStorage,
-  _setStorage,
-  _removeStorage,
   initStorage,
   addStorage,
   updateStorage,

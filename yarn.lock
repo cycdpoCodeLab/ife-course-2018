@@ -7090,6 +7090,10 @@ san-store@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/san-store/-/san-store-1.1.0.tgz#ac4c350c4335d3ee4a2952903c2d53d97fbf6d41"
 
+san-update@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/san-update/-/san-update-2.1.0.tgz#3d810bbf82a09e661b0790c02408c3b29c28d50a"
+
 san@^3.5.11:
   version "3.5.11"
   resolved "https://registry.yarnpkg.com/san/-/san-3.5.11.tgz#42694e1773e92d1a32493aca48f9b9da77a434ca"

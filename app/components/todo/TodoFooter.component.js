@@ -1,4 +1,4 @@
-import san from 'san';
+import {connect} from 'san-store'
 
 import './todoFooter.scss';
 
@@ -6,7 +6,14 @@ import {
   Link
 } from 'san-router';
 
-export default san.defineComponent({
+export default connect.san(
+  {
+    todoList: 'todoList'
+  },
+  {
+    clearCompletedTodo: 'clearCompletedTodo',
+  }
+)({
   components: {
     'router-link': Link
   },
@@ -45,6 +52,7 @@ export default san.defineComponent({
 
   inited() {
   },
+
   filters: {
     leftCount(todoList) {
       let _leftCount = todoList.length - this.data.get('completedCount');
@@ -63,7 +71,7 @@ export default san.defineComponent({
   },
 
   clearCompleted() {
-    this.dispatch('clear-completed-todo');
+    this.actions.clearCompletedTodo();
   },
 });
 

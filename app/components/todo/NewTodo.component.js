@@ -1,8 +1,13 @@
-import san from 'san';
-
 import './newTodo.scss';
 
-export default san.defineComponent({
+import {connect} from 'san-store'
+
+export default connect.san(
+  {},
+  {
+    addTodo: 'addNewTodo',
+  }
+)({
   components: {},
 
   template: `
@@ -37,7 +42,8 @@ export default san.defineComponent({
     }
 
     console.log('增加一条记录: ', _value);
-    this.dispatch('new-todo-item');
+    this.actions.addTodo(_value);
+    this.data.set('value', '');
   },
 });
 

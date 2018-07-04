@@ -1,9 +1,15 @@
-import san from 'san';
+import {connect} from 'san-store'
 
 import './todoListItem.scss';
 
 
-export default san.defineComponent({
+export default connect.san(
+  {},
+  {
+    removeTodoItem: 'removeTodoItem',
+    updateTodoItem: 'updateTodoItem',
+  }
+)({
   components: {},
 
   template: `
@@ -81,16 +87,16 @@ export default san.defineComponent({
     }
 
     console.log('更新一条记录: ', _title);
-    this.dispatch('update-todo-item', this.data.get('item'));
+    this.update();
     this.data.set('isEditing', false);
   },
 
   remove() {
-    this.dispatch('remove-todo-item', this.data.get('item'));
+    this.actions.removeTodoItem(this.data.get('item'));
   },
 
   update() {
-    this.dispatch('update-todo-item', this.data.get('item'));
+    this.actions.updateTodoItem(this.data.get('item'));
   }
 });
 
