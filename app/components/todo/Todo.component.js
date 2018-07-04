@@ -120,15 +120,16 @@ export default san.defineComponent({
 
     },
 
-    // todo fix bug
     'toggle-all-todo'() {
       let
         _isAllChecked = this.data.get('isAllChecked')
         , _newTodoList = this.data.get('todoList')
           .map(item => {
             item.completed = !_isAllChecked;
-            myStorage.updateStorage(item);  // 同时更新到storage
-            return item;
+
+            let _newItem = _shallowClone(item);
+            myStorage.updateStorage(_newItem);  // 同时更新到storage
+            return _newItem;
           })
       ;
 
@@ -176,4 +177,21 @@ export default san.defineComponent({
     }
   },
 });
+
+/**
+ * 浅拷贝
+ * @param obj
+ * @private
+ */
+let _shallowClone = obj => {
+  let cloneObj = {};
+
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      cloneObj[key] = obj[key];
+    }
+  }
+
+  return cloneObj;
+};
 
