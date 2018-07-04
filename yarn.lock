@@ -7086,6 +7086,10 @@ san-router@^1.2.0:
   dependencies:
     babel-polyfill "^6.23.0"
 
+san-store@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/san-store/-/san-store-1.1.0.tgz#ac4c350c4335d3ee4a2952903c2d53d97fbf6d41"
+
 san@^3.5.11:
   version "3.5.11"
   resolved "https://registry.yarnpkg.com/san/-/san-3.5.11.tgz#42694e1773e92d1a32493aca48f9b9da77a434ca"
