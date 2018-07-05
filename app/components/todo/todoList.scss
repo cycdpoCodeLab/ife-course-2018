@@ -30,6 +30,30 @@
   }
 }
 
+.add-todo {
+  @extend %abs;
+  top: -65px;
+  right: 0;
+  height: 65px;
+  width: 60px;
+  @extend %flexCenter;
+  opacity: .6;
+
+  &::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 24px;
+
+    background: url("../../../static/images/icon-add.svg") no-repeat;
+    background-size: 100% 100%;
+  }
+
+  &:hover {
+    opacity: .8;
+  }
+}
+
 .todo-list {
   margin: 0;
   padding: 0;

@@ -1,12 +1,9 @@
+import san from 'san';
 import './todo.scss';
 
 // service
-import myStorage from './localstorage.funcs';
-import {
-  router
-} from 'san-router';
+import myStorage from '../../store/localstorage.funcs';
 import {connect} from 'san-store'
-import './store';
 
 // component
 import NewTodo from './NewTodo.component';
@@ -23,7 +20,7 @@ export default connect.san(
     initTodoApp: 'initTodoApp',
     handleTodoList: 'handleTodoList',
   }
-)({
+)(san.defineComponent({
   components: {
     'new-todo': NewTodo,
     'todo-footer': TodoFooter,
@@ -62,16 +59,14 @@ export default connect.san(
   },
 
   inited() {
-    router.add({
-      rule: '/:type',
-      handler: e => {
-        let _type = e.query.type;
-        if (_type) {
-          this.data.set('type', _type);
-        }
-      },
-    });
-    router.start();
+  },
+
+  route() {
+    let route = this.data.get('route');
+
+    if(route.query.type) {
+      this.data.set('type', route.query.type);
+    }
   },
 
   computed: {
@@ -119,6 +114,6 @@ export default connect.san(
       });
     },
   },
-});
+}));
 
 

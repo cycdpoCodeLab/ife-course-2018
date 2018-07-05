@@ -29,6 +29,7 @@ body {
  * Main Frame
  *---------------------------*/
 .root {
+  @extend %rel;
   margin: 30px auto 100px;
   min-width: 230px;
   max-width: 550px;

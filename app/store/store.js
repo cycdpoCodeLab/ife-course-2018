@@ -37,6 +37,7 @@ store.addAction('addNewTodo', title => {
     _lastOrder = store.getState('lastOrder') + 1
     , _item = {
       title: title,
+      endTime: '',
       order: _lastOrder,
       completed: false,
       id: 'todo-' + _lastOrder

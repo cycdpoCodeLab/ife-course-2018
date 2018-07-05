@@ -1,4 +1,7 @@
 import {connect} from 'san-store'
+import {
+  Link
+} from 'san-router';
 
 import './todoListItem.scss';
 
@@ -10,7 +13,9 @@ export default connect.san(
     updateTodoItem: 'updateTodoItem',
   }
 )({
-  components: {},
+  components: {
+    'router-link': Link
+  },
 
   template: `
   <li class="list-item{{ item.completed ? ' completed' : ''}}{{ isEditing ? ' editing' : '' }}">
@@ -24,6 +29,10 @@ export default connect.san(
       on-dblclick="doubleClickMask($event)"
     ></div>
    
+    <router-link
+      to="/edit/{{ item.id }}"
+      class="list-item__edit_link"/>
+    
     <button 
       class="list-item__del"
       on-click="remove"

@@ -27,15 +27,15 @@ export default connect.san(
       
       <div class="filters-wrapper">
         <router-link
-          to="/all"
+          to="/type/all"
           class="{{ type === 'all' ? 'selected' : ''}}"
         >All</router-link>
         <router-link
-          to="/active"
+          to="/type/active"
           class="{{ type === 'active' ? 'selected' : ''}}"
         >Active</router-link>
         <router-link
-          to="/completed"
+          to="/type/completed"
           class="{{ type === 'completed' ? 'selected' : ''}}"
         >Completed</router-link>
       </div>
