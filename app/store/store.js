@@ -1,5 +1,8 @@
 import {store} from 'san-store';
-import {updateBuilder} from 'san-update';
+import {
+  updateBuilder,
+  merge,
+} from 'san-update';
 
 import myStorage from './localstorage.funcs';
 
@@ -32,17 +35,22 @@ store.addAction('initTodoApp', () => {
   ]);
 });
 
-store.addAction('addNewTodo', title => {
+store.addAction('addNewTodo', item => {
   let
     _lastOrder = store.getState('lastOrder') + 1
     , _item = {
-      title: title,
+      title: '',
       endTime: '',
       order: _lastOrder,
       completed: false,
       id: 'todo-' + _lastOrder
+    };
+
+  for (let key in item) {
+    if (item.hasOwnProperty(key)) {
+      _item[key] = item[key];
     }
-  ;
+  }
 
   return Promise.all([
     myStorage.addStorage(_item),

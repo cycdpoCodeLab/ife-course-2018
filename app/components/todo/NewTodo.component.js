@@ -42,7 +42,9 @@ export default connect.san(
     }
 
     console.log('增加一条记录: ', _value);
-    this.actions.addTodo(_value);
+    this.actions.addTodo({
+        title: _value
+      });
     this.data.set('value', '');
   },
 });

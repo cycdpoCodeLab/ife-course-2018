@@ -23,6 +23,7 @@ export default connect.san(
     value="{= item.title =}"
     on-keydown="handleEditKeydown($event)"
     on-blur="changeEdit"/>
+    <span class="list-item__end-time">End Time: {{ item.endTime }}</span>
     
     <div
       class="list-item__mask"
@@ -49,6 +50,7 @@ export default connect.san(
       item: {
         title: '',
         order: 0,
+        endTime: '',
         completed: false,
         id: ''
       },

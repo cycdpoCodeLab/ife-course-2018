@@ -17,8 +17,12 @@
 
   label {
     display: block;
-    padding: 20px 15px 0;
+    padding: 30px 15px 0;
   }
+}
+
+.edit-item-wrapper {
+  @extend %rel;
 }
 
 .edit-title {
@@ -33,6 +37,17 @@
   color: inherit;
 
   box-shadow: inset 0 -2px 1px rgba(black, .03);
+}
+
+.error {
+  @extend %abs;
+  left: 0;
+  bottom: -24px;
+  height: 24px;
+  padding-left: 15px;
+  line-height: 24px;
+
+  color: #f56c6c;
 }
 
 .edit-buttons-wrapper {
