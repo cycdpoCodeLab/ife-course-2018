@@ -12,16 +12,59 @@ if (PRODUCTION) {
   console.log('Production Mode');
 }
 
+// components
+import Mock from './Mock';
+import ListWrapperComponent from './components/ListWrapper.component';
+
 // 定义Component
 let MyApp = san.defineComponent({
-  template: `<h1 class="title">{{ hello }}</h1>`
+  components: {
+    'list-wrapper': ListWrapperComponent,
+  },
+
+  template: `
+  <div class="root">
+    <h1 class="title">{{ hello }}</h1>
+    <list-wrapper dataArray="{{ aData }}" listState="{{ listState }}">
+      <li slot="item">{{ title }}</li>
+      <div slot="loading" class="loading">loading...</div>
+    </list-wrapper>
+  </div>
+  `,
+
+  initData() {
+    return {
+      aData: [],
+      listState: {
+        updating: false,
+      }
+    };
+  },
+
+  messages: {
+    'scrolled'() {
+      console.log('scrolled');
+      this.data.set('listState.updating', true);
+      this.mock.update()
+        .then(data => {
+          this.data.set('aData', [...data]);
+          this.data.set('listState.updating', false);
+        });
+    }
+  },
+
+  inited() {
+    // 模拟数据
+    this.mock = new Mock();
+    this.mock.init();
+
+    this.data.set('aData', this.mock.data);
+  },
 });
 
-let myApp = new MyApp({
+new MyApp({
   data: {
-    hello: 'Hello World!'
+    hello: 'Infinite Scroller'
   }
-});
-
-myApp.attach(document.body);
+}).attach(document.body);
 

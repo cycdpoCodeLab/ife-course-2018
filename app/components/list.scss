@@ -1,0 +1,18 @@
+@import '../theme/variables';
+@import '../theme/utilities';
+
+.list-wrapper {
+  width: 640px;
+  margin: 0 auto;
+
+  li {
+    margin: 20px;
+    border: 1px solid $fontColor;
+    padding: 30px;
+  }
+}
+
+.loading {
+  text-align: center;
+  margin: 30px;
+}
